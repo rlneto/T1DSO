@@ -20,7 +20,6 @@ class EventoC(ABC):
     def __init__(self, calendario: Calendario, evento: Evento):
         self.__calendario = calendario
         self.__evento = evento
-
     @property
     def evento(self):
         return self.__evento
