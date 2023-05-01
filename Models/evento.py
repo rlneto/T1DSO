@@ -1,16 +1,12 @@
-from .calendario import Calendario
-from abc import ABC
+from abc import ABC, abstractmethod
 
 class Evento(ABC):
-    def __init__(self, calendario: Calendario(), data: str, titulo: str, descricao: str = "Sem descrição."):
-        self.__calendario = calendario
+    @abstractmethod
+    def __init__(self, data: str, titulo: str, descricao: str = "Sem descrição."):
         self.__data = data
         self.__titulo = titulo
         self.__descricao = descricao
 
-    @property
-    def calendario(self):
-        return self.__calendario
 
     @property
     def data(self):

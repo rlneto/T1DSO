@@ -1,8 +1,7 @@
-from evento import Evento
-from calendario import Calendario
+from Models.evento import Evento
 
 class Aniversario(Evento):
-    def __init__(self, calendario: Calendario(), data: str, titulo: str, aniversariante: str,
+    def __init__(self, data: str, titulo: str, aniversariante: str,
                  descricao: str = "Sem descrição."):
-        super().__init__(calendario, data, titulo, descricao)
+        super().__init__(data, titulo, descricao)
         self.__aniversariante = aniversariante

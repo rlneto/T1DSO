@@ -20,34 +20,43 @@ class EventoC(ABC):
     def __init__(self, calendario: Calendario, evento: Evento):
         self.__calendario = calendario
         self.__evento = evento
+        self.__descricao = ""
     @property
+    @abstractmethod
     def evento(self):
         return self.__evento
 
     @property
+    @abstractmethod
     def calendario(self):
         return self.evento.calendario
 
     @property
+    @abstractmethod
     def data(self):
         return self.evento.data
 
     @data.setter
+    @abstractmethod
     def data(self, nova_data: str):
         self.evento.data = nova_data
 
     @property
+    @abstractmethod
     def titulo(self):
         return self.evento.titulo
 
     @titulo.setter
+    @abstractmethod
     def titulo(self, novo_titulo: str):
         self.evento.titulo = novo_titulo
 
     @property
+    @abstractmethod
     def descricao(self):
         return self.evento.descricao
 
     @descricao.setter
+    @abstractmethod
     def descricao(self, nova_descricao: str):
         self.evento.descricao = nova_descricao
