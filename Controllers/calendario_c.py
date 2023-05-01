@@ -1,6 +1,7 @@
 from Models.calendario import Calendario
 from Views.calendario_v import CalendarioV
 from Controllers.aniversario_c import AniversarioC
+from random import random
 
 
 class CalendarioC:
@@ -26,7 +27,9 @@ class CalendarioC:
 
     def criar_calendario(self):
         temporario = self.calendarios.copy()
-        temporario[Calendario().chave] = Calendario()
+        chave = str(random())[2:4]
+        temporario[chave] = Calendario(chave)
+        print("Calendário criado com sucesso.\nChave: {}".format(chave))
         return temporario
 
     def anexar_calendario(self):

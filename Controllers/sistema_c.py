@@ -1,4 +1,4 @@
-from calendar import calendar
+
 
 from Views.sistema_v import SistemaV
 from Controllers.calendario_c import CalendarioC
@@ -24,12 +24,20 @@ class SistemaC:
         self.calendario.puxar_calendario(input("\nDigite a chave identificadora do calendário: "))
 
     def menu(self):
-        match self.tela.menu():
-            case 1:
-                self.criar()
-                self.menu()
-            case 2:
-                self.visualizar()
-            case _:
-                print("\nOpção inválida, tente novamente.\n")
-                self.menu()
+        try:
+            match int(self.tela.menu()):
+                case 1:
+                    self.criar()
+                    self.menu()
+                case 2:
+                    self.visualizar()
+                case 0:
+                    print("Saindo do sistema...")
+                    exit(0)
+                case _:
+                    print("\nOpção inválida, tente novamente.\n")
+                    self.menu()
+        except ValueError:
+            print("Erro: A opção escolhida deve ser um número inteiro.\nSaindo do sistema...")
+            exit()
+

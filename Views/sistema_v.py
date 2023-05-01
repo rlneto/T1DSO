@@ -1,19 +1,18 @@
+def bar():
+    print("=" * 20)
 
 
 class SistemaV:
     def __init__(self):
         pass
 
-    def bar(self):
-        print("=" * 20)
-
     def menu(self):
-        self.bar()
+        bar()
         print("      ONIVERSO      ")
-        self.bar()
-        opcoes = ("1 - Criar Calendário", "2 - Visualizar Calendário", )
+        bar()
+        opcoes = ("1 - Criar Calendário", "2 - Acessar Calendário", "0 - Sair")
         for opcao in opcoes:
             print(opcao)
         # print(type(opcoes))
-        escolha = int(input("Selecione uma opção: "))
+        escolha = input("Selecione uma opção: ")
         return escolha

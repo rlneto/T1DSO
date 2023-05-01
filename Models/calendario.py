@@ -1,8 +1,8 @@
 from random import random
 
 class Calendario:
-    def __init__(self):
-        self.__chave = str(random())[2:]
+    def __init__(self, chave: str):
+        self.__chave = chave
         self.__eventos = dict()
 
     @property
