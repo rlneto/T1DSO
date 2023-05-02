@@ -16,3 +16,9 @@ class SistemaV:
         # print(type(opcoes))
         escolha = input("Selecione uma opção: ")
         return escolha
+
+    def mensagem(self, message: str):
+        print(message)
+
+    def capturar(self, message) -> str:
+        return input(message)

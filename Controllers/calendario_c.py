@@ -34,9 +34,16 @@ class CalendarioC:
     def criar_calendario(self):
         temporario = self.calendarios.copy()
         chave = str(random())[2:4]
-        temporario[chave] = Calendario(chave)
-        print("Calendário criado com sucesso.\nChave: {}".format(chave))
-        return temporario
+        try:
+            teste = temporario[chave]
+        except KeyError:
+            temporario[chave] = Calendario(chave)
+            self.tela.sucesso(chave)
+            teste = None
+            return temporario
+        else:
+            return self.criar_calendario()
+
 
     def anexar_calendario(self):
         self.calendarios = self.criar_calendario()
@@ -44,7 +51,6 @@ class CalendarioC:
     def imprimir_calendarios(self):
         for item in self.calendarios.values():
             self.tela.listagem(item.chave)
-
 
     def puxar_calendario(self, chave: str) -> ():
         return self.calendarios[chave]

@@ -5,5 +5,9 @@ class CalendarioV:
         pass
 
     def listagem(self, frase: str):
-        print("Imprimindo relação de chaves dos calendários...\n")
+        print("Calendário encontrado!")
         print("Chave: ", frase)
+
+    def sucesso(self, chave: str):
+        print("Calendário criado com sucesso.\nChave: {}".format(chave))
+
