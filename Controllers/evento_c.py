@@ -1,53 +1,37 @@
-from Models.calendario import Calendario
 from Models.evento import Evento
-from Views.evento_v import EventoV
 from abc import ABC, abstractmethod
 
 
 class EventoC(ABC):
     @abstractmethod
-    def alterar_data(self):
-        self.evento.data = EventoV.alterar_data
+    def __init__(self, calendario):
+        self.__calendario_c = calendario
+        self.__tela = None
+        self.__evento = None
 
-    @abstractmethod
-    def alterar_titulo(self):
-        self.evento.titulo = EventoV.alterar_titulo
-
-    @abstractmethod
-    def alterar_descricao(self):
-        self.evento.descricao = EventoV.alterar_descricao
-
-    def __init__(self, calendario: Calendario, evento: Evento):
-        self.__calendario = calendario
-        self.__evento = evento
     @property
+    @abstractmethod
+    def tela(self):
+        return self.__tela
+
+    @property
+    @abstractmethod
+    def calendario_c(self):
+        return self.__calendario_c
+
+    @property
+    @abstractmethod
     def evento(self):
         return self.__evento
 
-    @property
-    def calendario(self):
-        return self.evento.calendario
+    @evento.setter
+    @abstractmethod
+    def evento(self, evento):
+        self.__evento = evento
 
-    @property
-    def data(self):
-        return self.evento.data
+    @abstractmethod
+    def incluir(self):
+        dados = self.tela.incluir_evento()
+        n_evento = Evento(dados[0], dados[1], dados[2])
+        return n_evento
 
-    @data.setter
-    def data(self, nova_data: str):
-        self.evento.data = nova_data
-
-    @property
-    def titulo(self):
-        return self.evento.titulo
-
-    @titulo.setter
-    def titulo(self, novo_titulo: str):
-        self.evento.titulo = novo_titulo
-
-    @property
-    def descricao(self):
-        return self.evento.descricao
-
-    @descricao.setter
-    def descricao(self, nova_descricao: str):
-        self.evento.descricao = nova_descricao
