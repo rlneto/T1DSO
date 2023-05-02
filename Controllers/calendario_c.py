@@ -10,6 +10,7 @@ class CalendarioC:
         self.__calendarios = dict()
         self.__calendario = dict()
         self.__tela = CalendarioV()
+        self.__aniversario = AniversarioC(self)
 
     @property
     def tela(self):
@@ -34,12 +35,9 @@ class CalendarioC:
     def criar_calendario(self):
         temporario = self.calendarios.copy()
         chave = str(random())[2:4]
-        try:
-            teste = temporario[chave]
-        except KeyError:
+        if chave not in temporario.keys():
             temporario[chave] = Calendario(chave)
             self.tela.sucesso(chave)
-            teste = None
             return temporario
         else:
             return self.criar_calendario()
@@ -51,6 +49,23 @@ class CalendarioC:
     def imprimir_calendarios(self):
         for item in self.calendarios.values():
             self.tela.listagem(item.chave)
+    def menu(self, chave: str):
+        try:
+            escolha = int(self.tela.menu_calendario(chave))
+        except ValueError:
+            self.tela.mensagem("Erro: A opção escolhida deve ser um número inteiro.\nSaindo do sistema...")
+            exit()
+        else:
+            match escolha:
+                case 1:
+                    pass
+                case _:
+                    exit(0)
 
     def puxar_calendario(self, chave: str) -> ():
-        return self.calendarios[chave]
+        self.calendario = self.calendarios[chave]
+        self.menu(chave)
+
+    # def visualizar_eventos(self):
+    #     for evento in self.calendario.items():
+

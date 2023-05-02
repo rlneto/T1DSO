@@ -1,4 +1,3 @@
-from Models.calendario import Calendario
 from Models.evento import Evento
 from Views.evento_v import EventoV
 from abc import ABC, abstractmethod
@@ -6,26 +5,15 @@ from abc import ABC, abstractmethod
 
 class EventoC(ABC):
     @abstractmethod
-    def alterar_data(self):
-        self.evento.data = EventoV.alterar_data
-
-    @abstractmethod
-    def alterar_titulo(self):
-        self.evento.titulo = EventoV.alterar_titulo
-
-    @abstractmethod
-    def alterar_descricao(self):
-        self.evento.descricao = EventoV.alterar_descricao
-
-    def __init__(self, calendario: Calendario, evento: Evento):
+    def __init__(self, calendario):
         self.__calendario = calendario
-        self.__evento = evento
-        self.__descricao = ""
+        self.__tela = None
+        self.__evento = None
 
     @property
     @abstractmethod
-    def evento(self):
-        return self.__evento
+    def tela(self):
+        return self.__tela
 
     @property
     @abstractmethod
@@ -34,30 +22,31 @@ class EventoC(ABC):
 
     @property
     @abstractmethod
-    def data(self):
-        return self.evento.data
+    def evento(self):
+        return self.__evento
 
-    @data.setter
+    @evento.setter
     @abstractmethod
-    def data(self, nova_data: str):
-        self.evento.data = nova_data
+    def evento(self, evento):
+        self.__evento = evento
 
-    @property
     @abstractmethod
-    def titulo(self):
-        return self.evento.titulo
+    def incluir(self):
+        dados = self.tela.incluir_evento()
+        n_evento = Evento(dados[0], dados[1], dados[2])
+        return n_evento
 
-    @titulo.setter
-    @abstractmethod
-    def titulo(self, novo_titulo: str):
-        self.evento.titulo = novo_titulo
 
-    @property
     @abstractmethod
-    def descricao(self):
-        return self.evento.descricao
+    def alterar_data(self):
+        self.data = self.tela.alterar_data
 
-    @descricao.setter
     @abstractmethod
-    def descricao(self, nova_descricao: str):
-        self.evento.descricao = nova_descricao
+    def alterar_titulo(self):
+        self.titulo = self.tela.alterar_titulo
+
+    @abstractmethod
+    def alterar_descricao(self):
+        self.descricao = self.tela.alterar_descricao
+
+

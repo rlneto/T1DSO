@@ -13,7 +13,6 @@ class SistemaV:
         opcoes = ("1 - Criar Calendário", "2 - Acessar Calendário", "9 - Visualizar Calendários (Admin)", "0 - Sair")
         for opcao in opcoes:
             print(opcao)
-        # print(type(opcoes))
         escolha = input("Selecione uma opção: ")
         return escolha
 

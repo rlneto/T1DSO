@@ -1,3 +1,5 @@
+def bar():
+    print("=" * 20)
 
 
 class CalendarioV:
@@ -11,3 +13,14 @@ class CalendarioV:
     def sucesso(self, chave: str):
         print("Calendário criado com sucesso.\nChave: {}".format(chave))
 
+    def menu_calendario(self, chave: str) -> str:
+        bar()
+        print("Opões para o calendário: {}".format(chave))
+        opcoes = ("1 - Visualizar Eventos", "2 - Editar Evento")
+        return input("\nSelecione uma das opções: ")
+
+    def mensagem(self, message: str):
+        print(message)
+
+    def capturar(self, message) -> str:
+        return input(message)
