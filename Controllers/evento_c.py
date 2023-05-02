@@ -21,6 +21,7 @@ class EventoC(ABC):
         self.__calendario = calendario
         self.__evento = evento
         self.__descricao = ""
+
     @property
     @abstractmethod
     def evento(self):
@@ -29,7 +30,7 @@ class EventoC(ABC):
     @property
     @abstractmethod
     def calendario(self):
-        return self.evento.calendario
+        return self.__calendario
 
     @property
     @abstractmethod

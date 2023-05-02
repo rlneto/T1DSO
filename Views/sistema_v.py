@@ -10,7 +10,7 @@ class SistemaV:
         bar()
         print("      ONIVERSO      ")
         bar()
-        opcoes = ("1 - Criar Calendário", "2 - Acessar Calendário", "0 - Sair")
+        opcoes = ("1 - Criar Calendário", "2 - Acessar Calendário", "9 - Visualizar Calendários (Admin)", "0 - Sair")
         for opcao in opcoes:
             print(opcao)
         # print(type(opcoes))

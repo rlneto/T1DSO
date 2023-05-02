@@ -9,10 +9,16 @@ class CalendarioC:
         self.__sistema_c = sistema_c
         self.__calendarios = dict()
         self.__calendario = dict()
+        self.__tela = CalendarioV()
+
+    @property
+    def tela(self):
+        return self.__tela
 
     @property
     def calendarios(self):
         return self.__calendarios
+
     @calendarios.setter
     def calendarios(self, calendarios_novos):
         self.__calendarios = calendarios_novos
@@ -34,6 +40,11 @@ class CalendarioC:
 
     def anexar_calendario(self):
         self.calendarios = self.criar_calendario()
+
+    def imprimir_calendarios(self):
+        for item in self.calendarios.values():
+            self.tela.listagem(item.chave)
+
 
     def puxar_calendario(self, chave: str) -> ():
         return self.calendarios[chave]

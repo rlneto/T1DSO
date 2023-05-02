@@ -23,21 +23,27 @@ class SistemaC:
     def visualizar(self):
         self.calendario.puxar_calendario(input("\nDigite a chave identificadora do calendário: "))
 
+    def imprimir(self):
+        self.calendario.imprimir_calendarios()
+
     def menu(self):
         try:
-            match int(self.tela.menu()):
+            escolha = int(self.tela.menu())
+        except ValueError:
+            print("Erro: A opção escolhida deve ser um número inteiro.\nSaindo do sistema...")
+            exit()
+        else:
+            match escolha:
                 case 1:
                     self.criar()
                     self.menu()
                 case 2:
                     self.visualizar()
+                case 9:
+                    self.imprimir()
                 case 0:
                     print("Saindo do sistema...")
                     exit(0)
                 case _:
                     print("\nOpção inválida, tente novamente.\n")
                     self.menu()
-        except ValueError:
-            print("Erro: A opção escolhida deve ser um número inteiro.\nSaindo do sistema...")
-            exit()
-
