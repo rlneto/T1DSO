@@ -2,7 +2,7 @@ from Views.evento_v import EventoV
 
 
 def bar():
-    print("=" * 25)
+    print("=" * 32)
 
 
 class AniversarioV(EventoV):
