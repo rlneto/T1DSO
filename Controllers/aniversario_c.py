@@ -32,7 +32,7 @@ class AniversarioC(EventoC):
         return n_evento
 
     def alterar(self):
-        n_evento = self.evento.copy()
+        n_evento = self.evento
         dados = self.tela.alterar_evento()
         n_evento.titulo, n_evento.descricao = dados[0], dados[1]
         return n_evento
