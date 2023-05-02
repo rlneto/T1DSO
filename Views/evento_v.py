@@ -6,25 +6,16 @@ class EventoV(ABC):
     def mostrar_data(self, data):
         print("\nData: ", data)
 
-    @abstractmethod
-    def alterar_data(self):
-        return str(input("\nInforme a nova data: "))
 
     @abstractmethod
     def mostrar_titulo(self, titulo):
         print("\nTítulo: ", titulo)
 
-    @abstractmethod
-    def alterar_titulo(self):
-        return str(input("\nInforme o novo título: "))
 
     @abstractmethod
     def mostrar_descricao(self, descricao):
         print("\nDescrição: ", descricao)
 
-    @abstractmethod
-    def alterar_descricao(self):
-        return str(input("\nInforme a nova descrição: "))
 
     @abstractmethod
     def incluir_evento(self) -> tuple:

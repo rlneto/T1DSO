@@ -61,7 +61,7 @@ class CalendarioC:
         for item in self.calendarios.values():
             self.tela.listagem(item.chave)
 
-    def puxar_calendario(self, chave: str) -> ():
+    def puxar_calendario(self, chave: str):
         self.calendario = self.calendarios[chave]
         self.menu(chave)
 
@@ -69,9 +69,9 @@ class CalendarioC:
         for evento in self.calendario.eventos.values():
             self.aniversario.mostrar_evento(evento)
 
-    def incluir_niver(self):
-        niver = self.aniversario.incluir()
-        self.calendario.eventos[niver.data] = niver
+    def acessar_niver(self):
+        niver = self.tela.puxar_data()
+        self.aniversario.menu(niver)
 
     def menu(self, chave: str):
         try:
@@ -82,9 +82,15 @@ class CalendarioC:
         else:
             match escolha:
                 case 1:
-                    self.visualizar_eventos()
+                    niver = self.aniversario.incluir()
+                    self.calendario.eventos[niver.data] = niver
+                    self.menu(chave)
                 case 2:
-                    self.incluir_niver()
+                    self.visualizar_eventos()
+                    self.menu(chave)
+                case 3:
+                    self.acessar_niver()
+                    self.menu(chave)
                 case 0:
                     self.sistema.menu()
                 case _:

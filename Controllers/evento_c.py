@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 class EventoC(ABC):
     @abstractmethod
     def __init__(self, calendario):
-        self.__calendario = calendario
+        self.__calendario_c = calendario
         self.__tela = None
         self.__evento = None
 
@@ -16,8 +16,8 @@ class EventoC(ABC):
 
     @property
     @abstractmethod
-    def calendario(self):
-        return self.__calendario
+    def calendario_c(self):
+        return self.__calendario_c
 
     @property
     @abstractmethod
@@ -35,14 +35,3 @@ class EventoC(ABC):
         n_evento = Evento(dados[0], dados[1], dados[2])
         return n_evento
 
-    @abstractmethod
-    def alterar_data(self):
-        self.evento.data = self.tela.alterar_data
-
-    @abstractmethod
-    def alterar_titulo(self):
-        self.evento.titulo = self.tela.alterar_titulo
-
-    @abstractmethod
-    def alterar_descricao(self):
-        self.evento.descricao = self.tela.alterar_descricao
