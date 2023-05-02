@@ -1,5 +1,4 @@
 from Models.evento import Evento
-from Views.evento_v import EventoV
 from abc import ABC, abstractmethod
 
 
@@ -36,17 +35,14 @@ class EventoC(ABC):
         n_evento = Evento(dados[0], dados[1], dados[2])
         return n_evento
 
-
     @abstractmethod
     def alterar_data(self):
-        self.data = self.tela.alterar_data
+        self.evento.data = self.tela.alterar_data
 
     @abstractmethod
     def alterar_titulo(self):
-        self.titulo = self.tela.alterar_titulo
+        self.evento.titulo = self.tela.alterar_titulo
 
     @abstractmethod
     def alterar_descricao(self):
-        self.descricao = self.tela.alterar_descricao
-
-
+        self.evento.descricao = self.tela.alterar_descricao

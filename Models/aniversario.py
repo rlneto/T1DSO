@@ -5,6 +5,9 @@ class Aniversario(Evento):
 
     def __init__(self, data: str, titulo: str, descricao: str = "Sem descrição."):
         super().__init__(data, titulo, descricao)
+        self.__data = data
+        self.__titulo = titulo
+        self.__descricao = descricao
 
     @property
     def data(self):

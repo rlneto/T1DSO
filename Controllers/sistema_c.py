@@ -31,7 +31,7 @@ class SistemaC:
             escolha = int(self.tela.menu())
         except ValueError:
             self.tela.mensagem("Erro: A opção escolhida deve ser um número inteiro.\nSaindo do sistema...")
-            exit()
+            exit(1)
         else:
             match escolha:
                 case 1:

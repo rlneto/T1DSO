@@ -1,5 +1,5 @@
 def bar():
-    print("=" * 20)
+    print("=" * 25)
 
 
 class CalendarioV:
@@ -15,8 +15,12 @@ class CalendarioV:
 
     def menu_calendario(self, chave: str) -> str:
         bar()
-        print("Opões para o calendário: {}".format(chave))
-        opcoes = ("1 - Visualizar Eventos", "2 - Editar Evento")
+        print("OPÇÕES DO CALENDÁRIO: {}".format(chave))
+        bar()
+        opcoes = ("\n1 - Visualizar Aniversários", "2 - Incluir Aniversário", "3 - Editar Aniversário",
+                  "4 - Excluir Aniversário", "0 - Voltar ao menu do sistema")
+        for item in opcoes:
+            print(item)
         return input("\nSelecione uma das opções: ")
 
     def mensagem(self, message: str):
