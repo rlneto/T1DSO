@@ -4,6 +4,9 @@ from Controllers.aniversario_c import AniversarioC
 from random import random
 
 
+
+
+
 class CalendarioC:
     def __init__(self, sistema_c):
         self.__sistema_c = sistema_c
@@ -53,6 +56,7 @@ class CalendarioC:
             return temporario
         else:
             return self.criar_calendario()
+
 
     def anexar_calendario(self):
         self.calendarios = self.criar_calendario()

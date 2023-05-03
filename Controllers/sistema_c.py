@@ -1,17 +1,44 @@
-
-
 from Views.sistema_v import SistemaV
 from Controllers.calendario_c import CalendarioC
+import json
+
+
+def carregar_db() -> dict:
+    with open("dados.json", "r") as arquivo:
+        cals = json.load(arquivo)
+        # print(cals)
+        # for item in cals.items():
+        #     print(item)
+        #     for subitem in item[1].items():
+        #         print(subitem)
+        #         for microitem in subitem[1].items():
+        #             print(microitem)
+        return cals
+
+
 
 
 class SistemaC:
+
+    def carrega_cals(self, cals: dict):
+        for item in self.__cals.values():
+            # print(item)
+            for subitem in item.values():
+                self.calendario.calendarios[subitem["data"]] = self.calendario.calendario.
+                self.calendario.calendarios[subitem["data"]]
     def __init__(self):
-        self.__calendario = CalendarioC(self)
         self.__tela = SistemaV()
+        self.__cals = carregar_db()
+        self.__calendario = CalendarioC(self)
+        self.carrega_cals(self.__cals)
 
     @property
     def tela(self):
         return self.__tela
+
+    @property
+    def cals(self):
+        return self.__cals
 
     @property
     def calendario(self):
@@ -44,6 +71,24 @@ class SistemaC:
                     self.imprimir()
                     self.menu()
                 case 0:
+                    # saida = dict()
+                    # for item in self.calendario.calendarios.items():
+                    #     print(item[0])
+                    #     print(item[1])
+                    #     saida[item[0]][item[1].data] = dict()
+                    #     saida[item[0]][item[1].data]["data"] = evento.data
+                    #     saida[item[0]][item[1].data]["titulo"] = evento.titulo
+                    #     saida[item[0]][item[1].data]["descricao"] = evento.descricao
+                    with open("dados.json", "w") as arquivo:
+                        saida = dict()
+                        for item in self.calendario.calendarios.items():
+                            saida[item[0]] = dict()
+                            for evento in item[1].eventos.values():
+                                saida[item[0]][evento.data] = dict()
+                                saida[item[0]][evento.data]["data"] = evento.data
+                                saida[item[0]][evento.data]["titulo"] = evento.titulo
+                                saida[item[0]][evento.data]["descricao"] = evento.descricao
+                        json.dump(saida, arquivo)
                     self.tela.mensagem("Saindo do sistema...")
                     exit(0)
                 case _:
