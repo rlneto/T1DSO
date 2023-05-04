@@ -1,6 +1,5 @@
 from Models.calendario import Calendario
 from Views.calendario_v import CalendarioV
-from Controllers.aniversario_c import AniversarioC
 from random import random
 
 
@@ -10,19 +9,12 @@ class CalendarioC:
         self.__calendarios = dict()
         self.__calendario = Calendario("00")
         self.__tela = CalendarioV()
-        self.__aniversario = AniversarioC(self)
 
     @property
     def tela(self):
         return self.__tela
 
-    @property
-    def aniversario(self):
-        return self.__aniversario
 
-    @aniversario.setter
-    def aniversario(self, niver):
-        self.__aniversario = niver
 
     @property
     def calendarios(self):
@@ -67,11 +59,11 @@ class CalendarioC:
 
     def visualizar_eventos(self):
         for evento in self.calendario.eventos.values():
-            self.aniversario.mostrar_evento(evento)
+            self.aniversario_c.mostrar_evento(evento)
 
     def acessar_niver(self):
         niver = self.tela.puxar_data()
-        self.aniversario.menu(niver)
+        self.aniversario_c.menu(niver)
 
     def menu(self, chave: str):
         try:
@@ -82,7 +74,7 @@ class CalendarioC:
         else:
             match escolha:
                 case 1:
-                    niver = self.aniversario.incluir()
+                    niver = self.aniversario_c.incluir()
                     self.calendario.eventos[niver.data] = niver
                     self.menu(chave)
                 case 2:
