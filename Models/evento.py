@@ -11,29 +11,29 @@ class Evento(ABC):
     @property
     @abstractmethod
     def data(self):
-        return self.data
+        return self.__data
 
     @data.setter
     @abstractmethod
     def data(self, nova_data: str):
-        self.data = nova_data
+        self.__data = nova_data
 
     @property
     @abstractmethod
     def titulo(self):
-        return self.titulo
+        return self.__titulo
 
     @titulo.setter
     @abstractmethod
     def titulo(self, novo_titulo: str):
-        self.titulo = novo_titulo
+        self.__titulo = novo_titulo
 
     @property
     @abstractmethod
     def descricao(self):
-        return self.descricao
+        return self.__descricao
 
     @descricao.setter
     @abstractmethod
     def descricao(self, nova_descricao: str):
-        self.descricao = nova_descricao
+        self.__descricao = nova_descricao
