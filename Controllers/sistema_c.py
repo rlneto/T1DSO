@@ -2,11 +2,13 @@
 
 from Views.sistema_v import SistemaV
 from Controllers.calendario_c import CalendarioC
+from Controllers.aniversario_c import AniversarioC
 
 
 class SistemaC:
     def __init__(self):
-        self.__calendario = CalendarioC(self)
+        self.__calendario_c = CalendarioC(self)
+        self.__aniversario_c = AniversarioC(self)
         self.__tela = SistemaV()
 
     @property
@@ -14,17 +16,21 @@ class SistemaC:
         return self.__tela
 
     @property
-    def calendario(self):
-        return self.__calendario
+    def calendario_c(self):
+        return self.__calendario_c
+
+    @property
+    def aniversario_c(self):
+        return self.__aniversario_c
 
     def criar(self):
-        self.calendario.anexar_calendario()
+        self.calendario_c.anexar_calendario()
 
     def visualizar(self):
-        self.calendario.puxar_calendario(self.tela.capturar("\nDigite a chave identificadora do calendário: "))
+        self.calendario_c.puxar_calendario(self.tela.capturar("\nDigite a chave identificadora do calendário: "))
 
     def imprimir(self):
-        self.calendario.imprimir_calendarios()
+        self.calendario_c.imprimir_calendarios()
 
     def menu(self):
         try:
