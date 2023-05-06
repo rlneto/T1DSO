@@ -4,9 +4,9 @@ from Controllers.evento_c import EventoC
 
 
 class AniversarioC(EventoC):
-    def __init__(self, calendario):
-        super().__init__(calendario)
-        self.__calendario_c = calendario
+    def __init__(self, sistema):
+        super().__init__(sistema)
+        self.__sistema_c = sistema
         self.__tela = AniversarioV()
         self.__evento = None
 
@@ -15,8 +15,8 @@ class AniversarioC(EventoC):
         return self.__tela
 
     @property
-    def calendario_c(self):
-        return self.__calendario_c
+    def sistema_c(self):
+        return self.__sistema_c
 
     @property
     def evento(self):
@@ -41,7 +41,7 @@ class AniversarioC(EventoC):
         self.tela.mostrar_tudo(aniversario)
 
     def menu(self, chave: str):
-        self.evento = self.calendario_c.calendario.eventos[chave]
+        self.evento = self.sistema_c.calendario_c.calendario.eventos[chave]
         try:
             escolha = int(self.tela.menu(chave))
         except ValueError:
@@ -56,9 +56,9 @@ class AniversarioC(EventoC):
                     self.evento = self.alterar()
                     self.menu(chave)
                 case 3:
-                    del self.calendario_c.calendario.eventos[chave]
-                    self.calendario_c.menu(self.calendario_c.calendario.chave)
+                    del self.sistema_c.calendario_c.calendario.eventos[chave]
+                    self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.calendario.chave)
                 case 0:
-                    self.calendario_c.menu(self.calendario_c.calendario.chave)
+                    self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.calendario.chave)
                 case _:
                     exit(0)

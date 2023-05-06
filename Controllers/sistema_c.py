@@ -12,19 +12,16 @@ class SistemaC:
         self.__tela = SistemaV()
 
     @property
-    def aniversario_c(self):
-        return self.__aniversario_c
-
-    @aniversario_c.setter
-    def aniversario_c(self, niver):
-        self.__aniversario_c = niver
-    @property
     def tela(self):
         return self.__tela
 
     @property
     def calendario_c(self):
         return self.__calendario_c
+
+    @property
+    def aniversario_c(self):
+        return self.__aniversario_c
 
     def criar(self):
         self.calendario_c.anexar_calendario()

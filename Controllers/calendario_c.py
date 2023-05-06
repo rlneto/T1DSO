@@ -14,8 +14,6 @@ class CalendarioC:
     def tela(self):
         return self.__tela
 
-
-
     @property
     def calendarios(self):
         return self.__calendarios
@@ -27,13 +25,11 @@ class CalendarioC:
     @property
     def calendario(self):
         return self.__calendario
-
     @calendario.setter
-    def calendario(self, calendario_novo):
-        self.__calendario = calendario_novo
-
+    def calendario(self, novo_calendario):
+        self.__calendario = novo_calendario
     @property
-    def sistema(self):
+    def sistema_c(self):
         return self.__sistema_c
 
     def criar_calendario(self):
@@ -59,11 +55,11 @@ class CalendarioC:
 
     def visualizar_eventos(self):
         for evento in self.calendario.eventos.values():
-            self.aniversario_c.mostrar_evento(evento)
+            self.sistema_c.aniversario_c.mostrar_evento(evento)
 
     def acessar_niver(self):
         niver = self.tela.puxar_data()
-        self.aniversario_c.menu(niver)
+        self.sistema_c.aniversario_c.menu(niver)
 
     def menu(self, chave: str):
         try:
@@ -74,7 +70,7 @@ class CalendarioC:
         else:
             match escolha:
                 case 1:
-                    niver = self.aniversario_c.incluir()
+                    niver = self.sistema_c.aniversario_c.incluir()
                     self.calendario.eventos[niver.data] = niver
                     self.menu(chave)
                 case 2:
@@ -84,6 +80,6 @@ class CalendarioC:
                     self.acessar_niver()
                     self.menu(chave)
                 case 0:
-                    self.sistema.menu()
+                    self.sistema_c.menu()
                 case _:
                     exit(0)
