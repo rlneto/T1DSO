@@ -70,16 +70,42 @@ class CalendarioC:
         else:
             match escolha:
                 case 1:
-                    niver = self.sistema_c.aniversario_c.incluir()
-                    self.calendario.eventos[niver.data] = niver
+                    self.menu_tipo("incluir")
                     self.menu(chave)
                 case 2:
-                    self.visualizar_eventos()
+                    self.menu_tipo("visualizar")
                     self.menu(chave)
                 case 3:
-                    self.acessar_niver()
+                    self.menu_tipo("acessar")
                     self.menu(chave)
                 case 0:
                     self.sistema_c.menu()
+                case _:
+                    exit(0)
+
+    def menu_tipo(self, verbo: str):
+        try:
+            r = int(self.tela.tipo_evento(verbo))
+        except ValueError:
+            self.tela.mensagem("Erro: A opção escolhida deve ser um número inteiro.\nSaindo do sistema...")
+            exit(1)
+        else:
+            match r:
+                case 1:
+                    if verbo == "incluir":
+                        niver = self.sistema_c.aniversario_c.incluir()
+                        self.calendario.eventos[niver.data] = niver
+                    elif verbo == "visualizar":
+                        self.visualizar_eventos()
+                    elif verbo == "acessar":
+                        self.acessar_niver()
+                case 2:
+                    #incluir evento social
+                    pass
+                case 3:
+                    #incluir evento academico
+                    pass
+                case 0:
+                    self.menu()
                 case _:
                     exit(0)

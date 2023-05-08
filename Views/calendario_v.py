@@ -19,11 +19,20 @@ class CalendarioV:
     def sucesso(self, chave: str):
         print("Calendário criado com sucesso.\nChave: {}".format(chave))
 
+    def tipo_evento(self, verbo):
+        print("Escolha o tipo de Evento para", verbo)
+        opcoes = ("\n1 - Aniversáio",  "2 - Social", "3 - Academico",
+                  "0 - Voltar às opções do calendário")
+        for item in opcoes:
+            print(item)
+        return self.capturar("\nSelecione uma das opções: ")
+
+
     def menu_calendario(self, chave: str) -> str:
         bar()
         print("OPÇÕES DO CALENDÁRIO: {}".format(chave))
         bar()
-        opcoes = ("\n1 - Incluir Aniversário",  "2 - Visualizar Aniversários", "3 - Acessar Aniversário",
+        opcoes = ("\n1 - Incluir Evento",  "2 - Visualizar Eventos", "3 - Acessar Evento por dia",
                   "0 - Voltar ao menu do sistema")
         for item in opcoes:
             print(item)
