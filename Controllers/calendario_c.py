@@ -53,13 +53,30 @@ class CalendarioC:
         self.calendario = self.calendarios[chave]
         self.menu(chave)
 
-    def visualizar_eventos(self):
-        for evento in self.calendario.eventos.values():
-            self.sistema_c.aniversario_c.mostrar_evento(evento)
+    def visualizar_eventos(self, tipo: str):
+        match tipo:
+            case "niver":
+                for evento in self.calendario.eventos_aniversarios.values():
+                    self.sistema_c.aniversario_c.mostrar_evento(evento)
+            case "social":
+                for evento in self.calendario.eventos_sociais.values():
+                    self.sistema_c.social_c.mostrar_evento(evento)
+            case "academico":
+                for evento in self.calendario.eventos_academicos.values():
+                    self.sistema_c.academico_c.mostrar_evento(evento)
 
-    def acessar_niver(self):
-        niver = self.tela.puxar_data()
-        self.sistema_c.aniversario_c.menu(niver)
+    def acessar_eventos(self, tipo: str):
+        match tipo:
+            case "niver":
+                niver = self.tela.puxar_data()
+                self.sistema_c.aniversario_c.menu(niver)
+            case "social":
+                social = self.tela.puxar_data()
+                self.sistema_c.social_c.menu(social)
+            case "academico":
+                academico = self.tela.puxar_data()
+                self.sistema_c.academico_c.menu(academico)
+                
 
     def menu(self, chave: str):
         try:
@@ -94,17 +111,27 @@ class CalendarioC:
                 case 1:
                     if verbo == "incluir":
                         niver = self.sistema_c.aniversario_c.incluir()
-                        self.calendario.eventos[niver.data] = niver
+                        self.calendario.eventos_aniversarios[niver.data] = niver
                     elif verbo == "visualizar":
-                        self.visualizar_eventos()
+                        self.visualizar_eventos("niver")
                     elif verbo == "acessar":
-                        self.acessar_niver()
+                        self.acessar_eventos("niver")
                 case 2:
-                    #incluir evento social
-                    pass
+                    if verbo == "incluir":
+                        social = self.sistema_c.social_c.incluir()
+                        self.calendario.eventos_sociais[social.data] = social
+                    elif verbo == "visualizar":
+                        self.visualizar_eventos("social")
+                    elif verbo == "acessar":
+                        self.acessar_eventos("social")
                 case 3:
-                    #incluir evento academico
-                    pass
+                    if verbo == "incluir":
+                        academico = self.sistema_c.academico_c.incluir()
+                        self.calendario.eventos_academicos[academico.data] = academico
+                    elif verbo == "visualizar":
+                        self.visualizar_eventos("academico")
+                    elif verbo == "acessar":
+                        self.acessar_eventos("academico")
                 case 0:
                     self.menu()
                 case _:

@@ -41,7 +41,7 @@ class AcademicoC(EventoC):
         self.tela.mostrar_tudo(academico)
 
     def menu(self, chave: str):
-        self.evento = self.sistema_c.calendario_c.calendario.eventos[chave]
+        self.evento = self.sistema_c.calendario_c.calendario.eventos_academicos[chave]
         try:
             escolha = int(self.tela.menu(chave))
         except ValueError:
@@ -56,7 +56,7 @@ class AcademicoC(EventoC):
                     self.evento = self.alterar()
                     self.menu(chave)
                 case 3:
-                    del self.sistema_c.calendario_c.calendario.eventos[chave]
+                    del self.sistema_c.calendario_c.calendario.eventos_academicos[chave]
                     self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.calendario.chave)
                 case 0:
                     self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.calendario.chave)
