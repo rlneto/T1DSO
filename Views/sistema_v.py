@@ -6,13 +6,20 @@ class SistemaV:
     def mensagem(self, message: str):
         print(message)
 
-    def capturar(self, message) -> str:
-        return input(message)
+    def capturar(self, message) -> int:
+        while True:
+            try:
+                escolha = int(input(message))
+            except ValueError:
+                self.mensagem("Erro: A opção escolhida deve ser um número inteiro.")
+            else:
+                break
+        return escolha
 
     def __init__(self):
         pass
 
-    def menu(self) -> str:
+    def menu(self) -> int:
         bar()
         print("      ONIVERSO      ")
         bar()

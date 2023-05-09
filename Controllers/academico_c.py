@@ -42,23 +42,18 @@ class AcademicoC(EventoC):
 
     def menu(self, chave: str):
         self.evento = self.sistema_c.calendario_c.calendario.eventos_academicos[chave]
-        try:
-            escolha = int(self.tela.menu(chave))
-        except ValueError:
-            self.tela.mensagem("Erro: A opção escolhida deve ser um número inteiro.\nSaindo do sistema...")
-            exit(1)
-        else:
-            match escolha:
-                case 1:
-                    self.mostrar_evento(self.evento)
-                    self.menu(chave)
-                case 2:
-                    self.evento = self.alterar()
-                    self.menu(chave)
-                case 3:
-                    del self.sistema_c.calendario_c.calendario.eventos_academicos[chave]
-                    self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.calendario.chave)
-                case 0:
-                    self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.calendario.chave)
-                case _:
-                    exit(0)
+        escolha = int(self.tela.menu(chave))
+        match escolha:
+            case 1:
+                self.mostrar_evento(self.evento)
+                self.menu(chave)
+            case 2:
+                self.evento = self.alterar()
+                self.menu(chave)
+            case 3:
+                del self.sistema_c.calendario_c.calendario.eventos_academicos[chave]
+                self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.calendario.chave)
+            case 0:
+                self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.calendario.chave)
+            case _:
+                exit(0)

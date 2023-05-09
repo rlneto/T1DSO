@@ -10,7 +10,14 @@ class AcademicoV(EventoV):
         print(message)
 
     def capturar(self, message) -> str:
-        return input(message)
+        while True:
+            try:
+                escolha = int(input(message))
+            except ValueError:
+                self.mensagem("Erro: A opção escolhida deve ser um número inteiro.")
+            else:
+                break
+        return escolha
 
     def mostrar_data(self, data):
         print("\nData: ", data)
@@ -51,7 +58,7 @@ class AcademicoV(EventoV):
         descricao = input("\nPor fim, informe a nova descrição: ")
         return titulo, materia, professor, descricao
 
-    def menu(self, chave: str) -> str:
+    def menu(self, chave: str) -> int:
         bar()
         print("MENU EVENTOS ACADÊMICOS DIA: ", chave[0:2], "/", chave[2:])
         bar()

@@ -35,3 +35,14 @@ class EventoC(ABC):
         n_evento = Evento(dados[0], dados[1], dados[2])
         return n_evento
 
+    @abstractmethod
+    def alterar(self) -> evento:
+        pass
+
+    @abstractmethod
+    def mostrar_evento(self, evento):
+        pass
+
+    @abstractmethod
+    def menu(self, chave: str):
+        pass

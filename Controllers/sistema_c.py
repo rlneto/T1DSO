@@ -45,25 +45,20 @@ class SistemaC:
         self.calendario_c.imprimir_calendarios()
 
     def menu(self):
-        try:
-            escolha = int(self.tela.menu())
-        except ValueError:
-            self.tela.mensagem("Erro: A opção escolhida deve ser um número inteiro.\nSaindo do sistema...")
-            exit(1)
-        else:
-            match escolha:
-                case 1:
-                    self.criar()
-                    self.menu()
-                case 2:
-                    self.visualizar()
-                    self.menu()
-                case 9:
-                    self.imprimir()
-                    self.menu()
-                case 0:
-                    self.tela.mensagem("Saindo do sistema...")
-                    exit(0)
-                case _:
-                    self.tela.mensagem("\nOpção inválida, tente novamente.\n")
-                    self.menu()
+        escolha = self.tela.menu()
+        match escolha:
+            case 1:
+                self.criar()
+                self.menu()
+            case 2:
+                self.visualizar()
+                self.menu()
+            case 9:
+                self.imprimir()
+                self.menu()
+            case 0:
+                self.tela.mensagem("Saindo do sistema...")
+                exit(0)
+            case _:
+                self.tela.mensagem("\nOpção inválida, tente novamente.\n")
+                self.menu()

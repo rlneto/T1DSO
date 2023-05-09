@@ -79,60 +79,50 @@ class CalendarioC:
                 
 
     def menu(self, chave: str):
-        try:
-            escolha = int(self.tela.menu_calendario(chave))
-        except ValueError:
-            self.tela.mensagem("Erro: A opção escolhida deve ser um número inteiro.\nSaindo do sistema...")
-            exit(1)
-        else:
-            match escolha:
-                case 1:
-                    self.menu_tipo("incluir")
-                    self.menu(chave)
-                case 2:
-                    self.menu_tipo("visualizar")
-                    self.menu(chave)
-                case 3:
-                    self.menu_tipo("acessar")
-                    self.menu(chave)
-                case 0:
-                    self.sistema_c.menu()
-                case _:
-                    exit(0)
+        escolha = self.tela.menu_calendario(chave)
+        match escolha:
+            case 1:
+                self.menu_tipo("incluir")
+                self.menu(chave)
+            case 2:
+                self.menu_tipo("visualizar")
+                self.menu(chave)
+            case 3:
+                self.menu_tipo("acessar")
+                self.menu(chave)
+            case 0:
+                self.sistema_c.menu()
+            case _:
+                exit(0)
 
     def menu_tipo(self, verbo: str):
-        try:
-            r = int(self.tela.tipo_evento(verbo))
-        except ValueError:
-            self.tela.mensagem("Erro: A opção escolhida deve ser um número inteiro.\nSaindo do sistema...")
-            exit(1)
-        else:
-            match r:
-                case 1:
-                    if verbo == "incluir":
-                        niver = self.sistema_c.aniversario_c.incluir()
-                        self.calendario.eventos_aniversarios[niver.data] = niver
-                    elif verbo == "visualizar":
-                        self.visualizar_eventos("niver")
-                    elif verbo == "acessar":
-                        self.acessar_eventos("niver")
-                case 2:
-                    if verbo == "incluir":
-                        social = self.sistema_c.social_c.incluir()
-                        self.calendario.eventos_sociais[social.data] = social
-                    elif verbo == "visualizar":
-                        self.visualizar_eventos("social")
-                    elif verbo == "acessar":
-                        self.acessar_eventos("social")
-                case 3:
-                    if verbo == "incluir":
-                        academico = self.sistema_c.academico_c.incluir()
-                        self.calendario.eventos_academicos[academico.data] = academico
-                    elif verbo == "visualizar":
-                        self.visualizar_eventos("academico")
-                    elif verbo == "acessar":
-                        self.acessar_eventos("academico")
-                case 0:
-                    self.menu()
-                case _:
-                    exit(0)
+        r = int(self.tela.tipo_evento(verbo))
+        match r:
+            case 1:
+                if verbo == "incluir":
+                    niver = self.sistema_c.aniversario_c.incluir()
+                    self.calendario.eventos_aniversarios[niver.data] = niver
+                elif verbo == "visualizar":
+                    self.visualizar_eventos("niver")
+                elif verbo == "acessar":
+                    self.acessar_eventos("niver")
+            case 2:
+                if verbo == "incluir":
+                    social = self.sistema_c.social_c.incluir()
+                    self.calendario.eventos_sociais[social.data] = social
+                elif verbo == "visualizar":
+                    self.visualizar_eventos("social")
+                elif verbo == "acessar":
+                    self.acessar_eventos("social")
+            case 3:
+                if verbo == "incluir":
+                    academico = self.sistema_c.academico_c.incluir()
+                    self.calendario.eventos_academicos[academico.data] = academico
+                elif verbo == "visualizar":
+                    self.visualizar_eventos("academico")
+                elif verbo == "acessar":
+                    self.acessar_eventos("academico")
+            case 0:
+                self.menu()
+            case _:
+                exit(0)

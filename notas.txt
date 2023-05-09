@@ -3,11 +3,13 @@ se criar dois eventos do mesmo tipo no mesmo dia ficara apenas o ultimo evento (
 
 verificar calendario vazio e sistema sem calendarios
 
-verificar inputs
+verificar inputs (view)
 
 while nos cases
 
 validar data 1-31 1-30 1-29
+
+opção no menu do sistema de visualizar os calendarios, tem que ser exclusiva do adiministrador.
 
 ---------------------Modificações
 add tipos de eventos (MVC)
@@ -16,3 +18,7 @@ add novo menu e edição no menu calendario (para funcionar com os novos tipos)
 novos dicionarios de eventos
 agora as opções incluir/visualizar/acesar funcionam para todos os tipos de evento (edição dos menus e funções relacionadas)
 ----------------------2
+Correção do evento_c (abs) (agora possui todas as funções abs)
+Correção do evento_v (abs) (agora possui todas as funções abs)
+Correção do tratamento de exções dos menus (agora se encontra no view)
+----------------------3

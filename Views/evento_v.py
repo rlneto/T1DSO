@@ -27,6 +27,22 @@ class EventoV(ABC):
         descricao = input("\nPor fim, informe a descrição do evento: ")
         return data, titulo, descricao
 
+    @abstractmethod
+    def mensagem(self, message: str):
+        pass
+
+    @abstractmethod
+    def capturar(self, message) ->str:
+        pass
+
+    @abstractmethod
+    def alterar_evento(self) ->tuple:
+        pass
+
+    @abstractmethod
+    def menu(self) ->int:
+        pass
+
 
     def __init__(self):
         pass
