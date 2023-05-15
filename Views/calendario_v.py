@@ -40,7 +40,7 @@ class CalendarioV:
         print("OPÇÕES DO CALENDÁRIO: {}".format(chave))
         bar()
         opcoes = ("\n1 - Incluir/editar Evento",  "2 - Visualizar Eventos",
-                  "3 - Acessar Evento por dia",
+                  "3 - Acessar Evento por dia", "4 - excluir calendário",
                   "0 - Voltar ao menu do sistema")
         for item in opcoes:
             print(item)

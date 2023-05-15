@@ -138,6 +138,8 @@ class CalendarioC:
             case 3:
                 self.menu_tipo("acessar")
                 self.menu(chave)
+            case 4:
+                del self.calendarios[chave]
             case 0:
                 self.sistema_c.menu()
             case _:
