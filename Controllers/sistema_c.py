@@ -46,11 +46,15 @@ class SistemaC:
             return False
 
     def visualizar(self):
-        chave = str(self.tela.capturar("\nDigite a chave identificadora do calendário: "))
+        chave = str(self.tela.capturar("\nDigite a chave identificadora do"
+                                       " calendário: "))
         if self.verificar_chave(chave):
             self.calendario_c.puxar_calendario(chave)
         else:
-            self.tela.mensagem("\nNão existe um calendário com essa chave, crie um novo calendário ou insira outra chave.\nVoltando às opções do menu principal...")
+            self.tela.mensagem("\nNão existe um calendário com essa chave,"
+                               " crie um novo calendário ou insira"
+                               " outra chave.\nVoltando às opções"
+                               " do menu principal...")
 
     def imprimir(self):
         self.calendario_c.imprimir_calendarios()
@@ -65,10 +69,12 @@ class SistemaC:
                 self.visualizar()
                 self.menu()
             case 9:
-                if self.tela.capturar("Insira a senha de administrador: ") == self.__senha:
+                if self.tela.capturar("Insira a senha de administrador: ") ==\
+                      self.__senha:
                     self.imprimir()
                 else:
-                    self.tela.mensagem("Senha incorreta, voltando ao menu principal...")
+                    self.tela.mensagem("Senha incorreta, voltando ao menu"
+                                       " principal...")
                 self.menu()
             case 0:
                 self.tela.mensagem("Saindo do sistema...")

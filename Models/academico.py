@@ -3,7 +3,8 @@ from Models.evento import Evento
 
 class Academico(Evento):
 
-    def __init__(self, data: str, titulo: str, materia: str, professor: str, descricao: str = "Sem descrição."):
+    def __init__(self, data: str, titulo: str, materia: str, professor: str,
+                 descricao: str):
         super().__init__(data, titulo, descricao)
         self.__materia = materia
         self.__professor = professor

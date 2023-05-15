@@ -25,9 +25,11 @@ class CalendarioC:
     @property
     def calendario(self):
         return self.__calendario
+
     @calendario.setter
     def calendario(self, novo_calendario):
         self.__calendario = novo_calendario
+
     @property
     def sistema_c(self):
         return self.__sistema_c
@@ -50,7 +52,7 @@ class CalendarioC:
             for item in self.calendarios.values():
                 self.tela.listagem(item.chave)
         else:
-            self.tela.mensagem("Vazio! Sem calendários no sistema.")            
+            self.tela.mensagem("Vazio! Sem calendários no sistema.")
 
     def puxar_calendario(self, chave: str):
         self.calendario = self.calendarios[chave]
@@ -60,26 +62,30 @@ class CalendarioC:
         match tipo:
             case "niver":
                 if self.calendario.eventos_aniversarios:
-                    for evento in self.calendario.eventos_aniversarios.values():
+                    for evento in \
+                            self.calendario.eventos_aniversarios.values():
                         self.sistema_c.aniversario_c.mostrar_evento(evento)
                 else:
-                    self.tela.mensagem("Vazio! Sem aniversários no calendário.")
+                    self.tela.mensagem("Vazio! Sem aniversários no"
+                                       " calendário.")
             case "social":
                 if self.calendario.eventos_sociais:
                     for evento in self.calendario.eventos_sociais.values():
                         self.sistema_c.social_c.mostrar_evento(evento)
                 else:
-                    self.tela.mensagem("Vazio! Sem eventos sociais no calendário.")
+                    self.tela.mensagem("Vazio! Sem eventos sociais no"
+                                       " calendário.")
             case "academico":
                 if self.calendario.eventos_academicos:
                     for evento in self.calendario.eventos_academicos.values():
                         self.sistema_c.academico_c.mostrar_evento(evento)
                 else:
-                    self.tela.mensagem("Vazio! Sem eventos academicos no calendário.")
+                    self.tela.mensagem("Vazio! Sem eventos academicos no"
+                                       " calendário.")
 
     def verificar_chave(self, tipo, chave):
         match tipo:
-            case 1: 
+            case 1:
                 evento_chave = self.calendario.eventos_aniversarios.keys()
             case 2:
                 evento_chave = self.calendario.eventos_sociais.keys()
@@ -94,22 +100,31 @@ class CalendarioC:
         match tipo:
             case "niver":
                 niver = self.tela.puxar_data()
-                if self.verificar_chave(1,niver):
+                if self.verificar_chave(1, niver):
                     self.sistema_c.aniversario_c.menu(niver)
                 else:
-                    self.tela.mensagem("\nNão existe um aniversário com essa data, crie/edite um aniversário ou procure por outra data.\nVoltando às opções do calendário...")
+                    self.tela.mensagem("\nNão existe um aniversário com essa"
+                                       " data, crie/edite um aniversário ou"
+                                       " procure por outra data.\nVoltando às"
+                                       " opções do calendário...")
             case "social":
                 social = self.tela.puxar_data()
-                if self.verificar_chave(2,social):
+                if self.verificar_chave(2, social):
                     self.sistema_c.social_c.menu(social)
                 else:
-                    self.tela.mensagem("\nNão existe um evento social com essa data, crie/edite um evento social ou procure por outra data.\nVoltando às opções do calendário...")
+                    self.tela.mensagem("\nNão existe um evento social com essa"
+                                       " data, crie/edite um evento social ou"
+                                       " procure por outra data.\nVoltando às"
+                                       " opções do calendário...")
             case "academico":
                 academico = self.tela.puxar_data()
-                if self.verificar_chave(3,academico):
+                if self.verificar_chave(3, academico):
                     self.sistema_c.academico_c.menu(academico)
                 else:
-                    self.tela.mensagem("\nNão existe um evento academico com essa data, crie/edite um evento academico ou procure por outra data.\nVoltando às opções do calendário...")
+                    self.tela.mensagem("\nNão existe um evento academico com"
+                                       " essa data, crie/edite um evento"
+                                       " academico ou procure por outra data."
+                                       "\nVoltando às opções do calendário...")
 
     def menu(self, chave: str):
         escolha = self.tela.menu_calendario(chave)
@@ -150,7 +165,8 @@ class CalendarioC:
             case 3:
                 if verbo == "incluir":
                     academico = self.sistema_c.academico_c.incluir()
-                    self.calendario.eventos_academicos[academico.data] = academico
+                    self.calendario.eventos_academicos[academico.data]\
+                        = academico
                 elif verbo == "visualizar":
                     self.visualizar_eventos("academico")
                 elif verbo == "acessar":

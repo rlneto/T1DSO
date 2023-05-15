@@ -17,7 +17,8 @@ class AcademicoV(EventoV):
             try:
                 escolha = int(input(message))
             except ValueError:
-                self.mensagem("Erro: A opção escolhida deve ser um número inteiro.")
+                self.mensagem("Erro: A opção escolhida deve ser um número"
+                              " inteiro.")
             else:
                 break
         return escolha
@@ -75,7 +76,8 @@ class AcademicoV(EventoV):
         bar()
         print("MENU EVENTOS ACADÊMICOS DIA: ", chave[0:2], "/", chave[2:])
         bar()
-        opcoes = ("1 - Visualizar eventos acadêmicos", "2 - Editar eventos acadêmicos", "3 - Excluir eventos acadêmicos",
+        opcoes = ("1 - Visualizar eventos acadêmicos", "2 - Editar eventos"
+                  " acadêmicos", "3 - Excluir eventos acadêmicos",
                   "0 - Voltar ao menu do calendário")
         for opcao in opcoes:
             print(opcao)

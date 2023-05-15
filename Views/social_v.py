@@ -17,7 +17,8 @@ class SocialV(EventoV):
             try:
                 escolha = int(input(message))
             except ValueError:
-                self.mensagem("Erro: A opção escolhida deve ser um número inteiro.")
+                self.mensagem("Erro: A opção escolhida deve ser um número"
+                              " inteiro.")
             else:
                 break
         return escolha
@@ -69,7 +70,8 @@ class SocialV(EventoV):
         bar()
         print("MENU EVENTOS SOCIAIS DIA: ", chave[0:2], "/", chave[2:])
         bar()
-        opcoes = ("1 - Visualizar eventos sociais", "2 - Editar eventos sociais", "3 - Excluir eventos sociais",
+        opcoes = ("1 - Visualizar eventos sociais", "2 - Editar eventos"
+                  "sociais", "3 - Excluir eventos sociais",
                   "0 - Voltar ao menu do calendário")
         for opcao in opcoes:
             print(opcao)

@@ -3,7 +3,7 @@ from Models.evento import Evento
 
 class Social(Evento):
 
-    def __init__(self, data: str, titulo: str, local: str, descricao: str = "Sem descrição."):
+    def __init__(self, data: str, titulo: str, local: str, descricao: str):
         super().__init__(data, titulo, descricao)
         self.__local = local
 

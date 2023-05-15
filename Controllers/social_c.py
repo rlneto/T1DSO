@@ -34,14 +34,16 @@ class SocialC(EventoC):
     def alterar(self):
         s_evento = self.evento
         dados = self.tela.alterar_evento()
-        s_evento.titulo,s_evento.local, s_evento.descricao = dados[0], dados[1], dados[2]
+        s_evento.titulo, s_evento.local, s_evento.descricao = dados[0],\
+            dados[1], dados[2]
         return s_evento
 
     def mostrar_evento(self, social):
         self.tela.mostrar_tudo(social)
 
     def menu(self, chave: str):
-        self.evento = self.sistema_c.calendario_c.calendario.eventos_sociais[chave]
+        self.evento = self.sistema_c.calendario_c.calendario.\
+            eventos_sociais[chave]
         escolha = int(self.tela.menu(chave))
         match escolha:
             case 1:
@@ -51,9 +53,12 @@ class SocialC(EventoC):
                 self.evento = self.alterar()
                 self.menu(chave)
             case 3:
-                del self.sistema_c.calendario_c.calendario.eventos_sociais[chave]
-                self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.calendario.chave)
+                del self.sistema_c.calendario_c.calendario.\
+                    eventos_sociais[chave]
+                self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.
+                                                 calendario.chave)
             case 0:
-                self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.calendario.chave)
+                self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.
+                                                 calendario.chave)
             case _:
                 exit(0)

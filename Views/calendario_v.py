@@ -14,7 +14,8 @@ class CalendarioV:
             try:
                 escolha = int(input(message))
             except ValueError:
-                self.mensagem("Erro: A opção escolhida deve ser um número inteiro.")
+                self.mensagem("Erro: A opção escolhida deve ser um número"
+                              " inteiro.")
             else:
                 break
         return escolha
@@ -34,12 +35,12 @@ class CalendarioV:
             print(item)
         return self.capturar("\nSelecione uma das opções: ")
 
-
     def menu_calendario(self, chave: str) -> int:
         bar()
         print("OPÇÕES DO CALENDÁRIO: {}".format(chave))
         bar()
-        opcoes = ("\n1 - Incluir/editar Evento",  "2 - Visualizar Eventos", "3 - Acessar Evento por dia",
+        opcoes = ("\n1 - Incluir/editar Evento",  "2 - Visualizar Eventos",
+                  "3 - Acessar Evento por dia",
                   "0 - Voltar ao menu do sistema")
         for item in opcoes:
             print(item)

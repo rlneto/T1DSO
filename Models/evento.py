@@ -1,12 +1,12 @@
 from abc import ABC, abstractmethod
 
+
 class Evento(ABC):
     @abstractmethod
     def __init__(self, data: str = "",  titulo: str = "", descricao: str = ""):
         self.__data = data
         self.__titulo = titulo
         self.__descricao = descricao
-
 
     @property
     def data(self):

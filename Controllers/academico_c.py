@@ -34,14 +34,16 @@ class AcademicoC(EventoC):
     def alterar(self):
         a_evento = self.evento
         dados = self.tela.alterar_evento()
-        a_evento.titulo, a_evento.materia, a_evento.professor, a_evento.descricao = dados[0], dados[1], dados[2], dados[3]
+        a_evento.titulo, a_evento.materia, a_evento.professor, \
+            a_evento.descricao = dados[0], dados[1], dados[2], dados[3]
         return a_evento
 
     def mostrar_evento(self, academico):
         self.tela.mostrar_tudo(academico)
 
     def menu(self, chave: str):
-        self.evento = self.sistema_c.calendario_c.calendario.eventos_academicos[chave]
+        self.evento = self.sistema_c.calendario_c.calendario.\
+            eventos_academicos[chave]
         escolha = int(self.tela.menu(chave))
         match escolha:
             case 1:
@@ -51,9 +53,12 @@ class AcademicoC(EventoC):
                 self.evento = self.alterar()
                 self.menu(chave)
             case 3:
-                del self.sistema_c.calendario_c.calendario.eventos_academicos[chave]
-                self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.calendario.chave)
+                del self.sistema_c.calendario_c.calendario.\
+                    eventos_academicos[chave]
+                self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.
+                                                 calendario.chave)
             case 0:
-                self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.calendario.chave)
+                self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.
+                                                 calendario.chave)
             case _:
                 exit(0)

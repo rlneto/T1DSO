@@ -9,11 +9,9 @@ class EventoV(ABC):
     def mostrar_data(self, data):
         print("\nData: ", data)
 
-
     @abstractmethod
     def mostrar_titulo(self, titulo):
         print("\nTítulo: ", titulo)
-
 
     @abstractmethod
     def mostrar_descricao(self, descricao):
@@ -28,14 +26,13 @@ class EventoV(ABC):
         pass
 
     @abstractmethod
-    def capturar(self, message) ->str:
+    def capturar(self, message) -> str:
         pass
 
     @abstractmethod
-    def alterar_evento(self) ->tuple:
+    def alterar_evento(self) -> tuple:
         pass
 
     @abstractmethod
-    def menu(self) ->int:
+    def menu(self) -> int:
         pass
-
