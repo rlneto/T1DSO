@@ -2,6 +2,9 @@ from abc import ABC, abstractmethod
 
 
 class EventoV(ABC):
+    def __init__(self):
+        pass
+
     @abstractmethod
     def mostrar_data(self, data):
         print("\nData: ", data)
@@ -36,6 +39,3 @@ class EventoV(ABC):
     def menu(self) ->int:
         pass
 
-
-    def __init__(self):
-        pass

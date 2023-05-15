@@ -3,6 +3,9 @@ def bar():
 
 
 class CalendarioV:
+    def __init__(self):
+        pass
+
     def mensagem(self, message: str):
         print(message)
 
@@ -15,9 +18,6 @@ class CalendarioV:
             else:
                 break
         return escolha
-
-    def __init__(self):
-        pass
 
     def listagem(self, frase: str):
         print("Calendário encontrado!")

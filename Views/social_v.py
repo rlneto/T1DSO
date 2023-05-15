@@ -6,6 +6,9 @@ def bar():
 
 
 class SocialV(EventoV):
+    def __init__(self):
+        super().__init__()
+
     def mensagem(self, message: str):
         print(message)
 
@@ -71,6 +74,3 @@ class SocialV(EventoV):
         for opcao in opcoes:
             print(opcao)
         return self.capturar("Selecione uma das opções: ")
-
-    def __init__(self):
-        super().__init__()

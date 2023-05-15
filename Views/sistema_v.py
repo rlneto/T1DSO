@@ -3,6 +3,9 @@ def bar():
 
 
 class SistemaV:
+    def __init__(self):
+        pass
+    
     def mensagem(self, message: str):
         print(message)
 
@@ -15,9 +18,6 @@ class SistemaV:
             else:
                 break
         return escolha
-
-    def __init__(self):
-        pass
 
     def menu(self) -> int:
         bar()
