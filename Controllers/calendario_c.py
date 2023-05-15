@@ -46,8 +46,11 @@ class CalendarioC:
         self.calendarios = self.criar_calendario()
 
     def imprimir_calendarios(self):
-        for item in self.calendarios.values():
-            self.tela.listagem(item.chave)
+        if self.calendarios:
+            for item in self.calendarios.values():
+                self.tela.listagem(item.chave)
+        else:
+            self.tela.mensagem("Vazio! Sem calendários no sistema.")            
 
     def puxar_calendario(self, chave: str):
         self.calendario = self.calendarios[chave]
@@ -56,27 +59,57 @@ class CalendarioC:
     def visualizar_eventos(self, tipo: str):
         match tipo:
             case "niver":
-                for evento in self.calendario.eventos_aniversarios.values():
-                    self.sistema_c.aniversario_c.mostrar_evento(evento)
+                if self.calendario.eventos_aniversarios:
+                    for evento in self.calendario.eventos_aniversarios.values():
+                        self.sistema_c.aniversario_c.mostrar_evento(evento)
+                else:
+                    self.tela.mensagem("Vazio! Sem aniversários no calendário.")
             case "social":
-                for evento in self.calendario.eventos_sociais.values():
-                    self.sistema_c.social_c.mostrar_evento(evento)
+                if self.calendario.eventos_sociais:
+                    for evento in self.calendario.eventos_sociais.values():
+                        self.sistema_c.social_c.mostrar_evento(evento)
+                else:
+                    self.tela.mensagem("Vazio! Sem eventos sociais no calendário.")
             case "academico":
-                for evento in self.calendario.eventos_academicos.values():
-                    self.sistema_c.academico_c.mostrar_evento(evento)
+                if self.calendario.eventos_academicos:
+                    for evento in self.calendario.eventos_academicos.values():
+                        self.sistema_c.academico_c.mostrar_evento(evento)
+                else:
+                    self.tela.mensagem("Vazio! Sem eventos academicos no calendário.")
+
+    def verificar_chave(self, tipo, chave):
+        match tipo:
+            case 1: 
+                evento_chave = self.calendario.eventos_aniversarios.keys()
+            case 2:
+                evento_chave = self.calendario.eventos_sociais.keys()
+            case 3:
+                evento_chave = self.calendario.eventos_academicos.keys()
+        if chave in evento_chave:
+            return True
+        else:
+            return False
 
     def acessar_eventos(self, tipo: str):
         match tipo:
             case "niver":
                 niver = self.tela.puxar_data()
-                self.sistema_c.aniversario_c.menu(niver)
+                if self.verificar_chave(1,niver):
+                    self.sistema_c.aniversario_c.menu(niver)
+                else:
+                    self.tela.mensagem("\nNão existe um aniversário com essa data, crie/edite um aniversário ou procure por outra data.\nVoltando às opções do calendário...")
             case "social":
                 social = self.tela.puxar_data()
-                self.sistema_c.social_c.menu(social)
+                if self.verificar_chave(2,social):
+                    self.sistema_c.social_c.menu(social)
+                else:
+                    self.tela.mensagem("\nNão existe um evento social com essa data, crie/edite um evento social ou procure por outra data.\nVoltando às opções do calendário...")
             case "academico":
                 academico = self.tela.puxar_data()
-                self.sistema_c.academico_c.menu(academico)
-                
+                if self.verificar_chave(3,academico):
+                    self.sistema_c.academico_c.menu(academico)
+                else:
+                    self.tela.mensagem("\nNão existe um evento academico com essa data, crie/edite um evento academico ou procure por outra data.\nVoltando às opções do calendário...")
 
     def menu(self, chave: str):
         escolha = self.tela.menu_calendario(chave)

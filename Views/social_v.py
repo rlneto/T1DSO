@@ -38,8 +38,18 @@ class SocialV(EventoV):
         print("Detalhes: ", socical.descricao)
 
     def incluir_evento(self) -> tuple:
-        dia = input("\nInforme o dia: ").zfill(2)
-        mes = input("\nAgora, informe o mês: ").zfill(2)
+        while True:
+            dia = input("\nInforme o dia: ").zfill(2)
+            if not dia.isdigit() or int(dia) < 1 or int(dia) > 31:
+                print("\nError: Dia inválido!Tente novamente")
+            else:
+                break
+        while True:
+            mes = input("\nAgora, informe o mês: ").zfill(2)
+            if not mes.isdigit() or int(mes) < 1 or int(mes) > 12:
+                print("\nError: Mês inválido!Tente novamente")
+            else:
+                break
         data = dia + mes
         titulo = input("\nInforme o tipo de atividade: ")
         local = input("\nInforme o local: ")

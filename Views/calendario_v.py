@@ -6,7 +6,7 @@ class CalendarioV:
     def mensagem(self, message: str):
         print(message)
 
-    def capturar(self, message) -> str:
+    def capturar(self, message) -> int:
         while True:
             try:
                 escolha = int(input(message))
@@ -39,13 +39,23 @@ class CalendarioV:
         bar()
         print("OPÇÕES DO CALENDÁRIO: {}".format(chave))
         bar()
-        opcoes = ("\n1 - Incluir Evento",  "2 - Visualizar Eventos", "3 - Acessar Evento por dia",
+        opcoes = ("\n1 - Incluir/editar Evento",  "2 - Visualizar Eventos", "3 - Acessar Evento por dia",
                   "0 - Voltar ao menu do sistema")
         for item in opcoes:
             print(item)
         return self.capturar("\nSelecione uma das opções: ")
 
     def puxar_data(self) -> str:
-        dia = input("Informe a o dia do Aniversário: ").zfill(2)
-        mes = input("Agora, informe o mês do Aniversário: ").zfill(2)
+        while True:
+            dia = input("Informe o dia: ").zfill(2)
+            if not dia.isdigit() or int(dia) < 1 or int(dia) > 31:
+                print("\nError: Dia inválido!Tente novamente")
+            else:
+                break
+        while True:
+            mes = input("Agora, informe o mês: ").zfill(2)
+            if not mes.isdigit() or int(mes) < 1 or int(mes) > 12:
+                print("\nError: Mês inválido!Tente novamente")
+            else:
+                break
         return dia + mes

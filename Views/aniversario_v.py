@@ -34,8 +34,18 @@ class AniversarioV(EventoV):
         print("Detalhes: ", aniversario.descricao)
 
     def incluir_evento(self) -> tuple:
-        dia = input("\nInforme o dia do aniversário: ").zfill(2)
-        mes = input("\nAgora, informe o mês do aniversário: ").zfill(2)
+        while True:
+            dia = input("\nInforme o dia do aniversário: ").zfill(2)
+            if not dia.isdigit() or int(dia) < 1 or int(dia) > 31:
+                print("\nError: Dia inválido!Tente novamente")
+            else:
+                break
+        while True:
+            mes = input("\nAgora, informe o mês do aniversário: ").zfill(2)
+            if not mes.isdigit() or int(mes) < 1 or int(mes) > 12:
+                print("\nError: Mês inválido!Tente novamente")
+            else:
+                break
         data = dia + mes
         titulo = input("\nAgora, informe o(s) nome(s) do(s) aniversariante(s): ")
         descricao = input("\nPor fim, informe a descrição do(s) aniversário(s): ")

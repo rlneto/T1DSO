@@ -16,16 +16,9 @@ class EventoV(ABC):
     def mostrar_descricao(self, descricao):
         print("\nDescrição: ", descricao)
 
-
     @abstractmethod
     def incluir_evento(self) -> tuple:
-        dia = input("\nInforme o dia do evento: ")
-        mes = input("\nAgora, informe o mês do evento: ")
-        data = dia+mes
-        dia, mes = None, None
-        titulo = input("\nAgora, informe o titulo do evento: ")
-        descricao = input("\nPor fim, informe a descrição do evento: ")
-        return data, titulo, descricao
+        pass
 
     @abstractmethod
     def mensagem(self, message: str):
