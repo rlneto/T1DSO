@@ -1,35 +1,17 @@
-def bar():
-    print("=" * 25)
+import PySimpleGUI as sg
 
 
-class CalendarioV:
-    def mensagem(self, message: str):
-        print(message)
-
-    def capturar(self, message) -> str:
-        return input(message)
-
+class CalendarioV2:
     def __init__(self):
-        pass
+        self.__window = None
+        self.init_components()
 
-    def listagem(self, frase: str):
-        print("Calendário encontrado!")
-        print("Chave: ", frase)
-
-    def sucesso(self, chave: str):
-        print("Calendário criado com sucesso.\nChave: {}".format(chave))
-
-    def menu_calendario(self, chave: str) -> str:
-        bar()
-        print("OPÇÕES DO CALENDÁRIO: {}".format(chave))
-        bar()
-        opcoes = ("\n1 - Incluir Aniversário",  "2 - Visualizar Aniversários", "3 - Acessar Aniversário",
-                  "0 - Voltar ao menu do sistema")
-        for item in opcoes:
-            print(item)
-        return self.capturar("\nSelecione uma das opções: ")
-
-    def puxar_data(self) -> str:
-        dia = input("Informe a o dia do Aniversário: ").zfill(2)
-        mes = input("Agora, informe o mês do Aniversário: ").zfill(2)
-        return dia + mes
+    def init_components(self):
+        sg.theme('Dark')
+        layout = [[sg.Text('Opções do calendário')],
+                  [sg.Radio('Incluir/editar evento', 'grupo_2', key='-IE-'), sg.Text('Dia: '),
+                   sg.InputText('', key='-DIA-'), sg.Text('Mês: '), sg.InputText('', key='-MES-')],
+                  [sg.Radio('Visualizar eventos', 'grupo_2', default=True, key='-VW-')],
+                  [sg.Radio('Voltar ao menu inicial', 'grupo_2', key='-HOME-')],
+                  [sg.Submit('Prosseguir')]]
+        self.__window = sg.Window('Oniverso', layout)

@@ -1,31 +1,18 @@
-def bar():
-    print("=" * 20)
+import PySimpleGUI as sg
 
 
-class SistemaV:
+class SistemaV2:
     def __init__(self):
-        pass
+        self.__window = None
+        self.init_components()
 
-    def mensagem(self, message: str):
-        print(message)
-
-    def capturar(self, message) -> int:
-        while True:
-            try:
-                escolha = int(input(message))
-            except ValueError:
-                self.mensagem("Erro: A opção escolhida deve ser um número"
-                              " inteiro.")
-            else:
-                break
-        return escolha
-
-    def menu(self) -> int:
-        bar()
-        print("      ONIVERSO      ")
-        bar()
-        opcoes = ("1 - Criar Calendário", "2 - Acessar Calendário",
-                  "9 - Visualizar Calendários (Admin)", "0 - Sair")
-        for opcao in opcoes:
-            print(opcao)
-        return self.capturar("Selecione uma opção: ")
+    def init_components(self):
+        sg.theme('Dark')
+        layout = [[sg.Text('ONIVERSO')],
+                  [sg.Radio('Criar calendário', 'grupo_1', key='-CC-')],
+                  [sg.Radio('Acessar calendário', 'grupo_1', default=True, key='-AC-'), sg.Text('Chave: '),
+                   sg.InputText('', key='-KEY-')],
+                  [sg.Radio('Menu de Admin', 'grupo_1', key='-ADM-'), sg.Text('Senha: '),
+                   sg.InputText('', key='-PWD-')],
+                  [sg.Submit('Prosseguir')]]
+        self.__window = sg.Window('Oniverso', layout)
