@@ -16,3 +16,12 @@ class SistemaV2:
                    sg.InputText('', key='-PWD-')],
                   [sg.Submit('Prosseguir')]]
         self.__window = sg.Window('Oniverso', layout)
+
+    def mensagem(self, texto: str):
+        sg.Popup(texto)
+
+
+    def menu(self):
+        return self.__window.read()
+
+

@@ -1,6 +1,6 @@
 
 
-from Views.sistema_v import SistemaV
+from Views.sistema_v2 import SistemaV2
 from Controllers.calendario_c import CalendarioC
 from Controllers.aniversario_c import AniversarioC
 from Controllers.social_c import SocialC
@@ -13,7 +13,7 @@ class SistemaC:
         self.__aniversario_c = AniversarioC(self)
         self.__social_c = SocialC(self)
         self.__academico_c = AcademicoC(self)
-        self.__tela = SistemaV()
+        self.__tela = SistemaV2()
         self.__senha = 123321
 
     @property
@@ -45,9 +45,7 @@ class SistemaC:
         else:
             return False
 
-    def visualizar(self):
-        chave = str(self.tela.capturar("\nDigite a chave identificadora do"
-                                       " calendário: "))
+    def visualizar(self, chave: str):
         if self.verificar_chave(chave):
             self.calendario_c.puxar_calendario(chave)
         else:
@@ -60,17 +58,23 @@ class SistemaC:
         self.calendario_c.imprimir_calendarios()
 
     def menu(self):
-        escolha = self.tela.menu()
+        event, values = self.tela.menu()
+        escolha = 1
+        if values['-AC-']:
+            escolha = 2
+        elif values['-ADM-']:
+            escolha = 9
+
+
         match escolha:
             case 1:
                 self.criar()
                 self.menu()
             case 2:
-                self.visualizar()
+                self.visualizar(values['-KEY-'])
                 self.menu()
             case 9:
-                if self.tela.capturar("Insira a senha de administrador: ") ==\
-                      self.__senha:
+                if values['-PWD-'] == self.__senha:
                     self.imprimir()
                 else:
                     self.tela.mensagem("Senha incorreta, voltando ao menu"
