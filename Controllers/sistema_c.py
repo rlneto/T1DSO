@@ -14,7 +14,7 @@ class SistemaC:
         self.__social_c = SocialC(self)
         self.__academico_c = AcademicoC(self)
         self.__tela = SistemaV2()
-        self.__senha = 123321
+        self.__senha = '123321'
 
     @property
     def tela(self):
@@ -77,12 +77,9 @@ class SistemaC:
                 if values['-PWD-'] == self.__senha:
                     self.imprimir()
                 else:
-                    self.tela.mensagem("Senha incorreta, voltando ao menu"
+                    if self.tela.capturar("Senha incorreta, tente novamente:") == self.__senha:
+                        self.imprimir()
+                    else:
+                        self.tela.mensagem("Senha incorreta, voltando ao menu"
                                        " principal...")
-                self.menu()
-            case 0:
-                self.tela.mensagem("Saindo do sistema...")
-                exit(0)
-            case _:
-                self.tela.mensagem("\nOpção inválida, tente novamente.\n")
                 self.menu()

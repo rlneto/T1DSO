@@ -20,8 +20,8 @@ class SistemaV2:
     def mensagem(self, texto: str):
         sg.Popup(texto)
 
+    def capturar(self, texto: str) -> str:
+        return sg.popup_get_text(texto)
 
     def menu(self):
         return self.__window.read()
-
-
