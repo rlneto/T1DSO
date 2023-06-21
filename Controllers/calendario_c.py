@@ -7,7 +7,7 @@ class CalendarioC:
     def __init__(self, sistema_c):
         self.__sistema_c = sistema_c
         self.__calendarios = dict()
-        self.__calendario = Calendario("00")
+        self.__calendario = Calendario("00", "00")
         self.__tela = CalendarioV()
 
     @property
@@ -37,15 +37,18 @@ class CalendarioC:
     def criar_calendario(self):
         temporario = self.calendarios.copy()
         chave = str(random())[2:4]
+        senha_adm = str(random())[2:4]
         if chave not in temporario.keys():
-            temporario[chave] = Calendario(chave)
-            self.tela.sucesso(chave)
-            return temporario
+            temporario[chave] = Calendario(chave, senha_adm)
+            return temporario, chave, senha_adm
         else:
             return self.criar_calendario()
 
     def anexar_calendario(self):
-        self.calendarios = self.criar_calendario()
+        criar = self.criar_calendario()
+        self.calendarios = criar[0].copy()
+        return criar[1], criar[2]
+
 
     def imprimir_calendarios(self):
         if self.calendarios:

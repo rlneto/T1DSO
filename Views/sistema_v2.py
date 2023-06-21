@@ -12,8 +12,7 @@ class SistemaV2:
                   [sg.Radio('Criar calendário', 'grupo_1', key='-CC-')],
                   [sg.Radio('Acessar calendário', 'grupo_1', default=True, key='-AC-'), sg.Text('Chave: '),
                    sg.InputText('', key='-KEY-')],
-                  [sg.Radio('Menu de Admin', 'grupo_1', key='-ADM-'), sg.Text('Senha: '),
-                   sg.InputText('', key='-PWD-')],
+                  [sg.Radio('Menu de desenvolvedor', 'grupo_1', key='-DEV-')],
                   [sg.Submit('Prosseguir')]]
         self.__window = sg.Window('Oniverso', layout)
 

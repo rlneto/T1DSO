@@ -1,5 +1,4 @@
 
-
 from Views.sistema_v2 import SistemaV2
 from Controllers.calendario_c import CalendarioC
 from Controllers.aniversario_c import AniversarioC
@@ -37,7 +36,7 @@ class SistemaC:
         return self.__academico_c
 
     def criar(self):
-        self.calendario_c.anexar_calendario()
+        return self.calendario_c.anexar_calendario()
 
     def verificar_chave(self, chave):
         if chave in self.calendario_c.calendarios.keys():
@@ -49,38 +48,34 @@ class SistemaC:
         if self.verificar_chave(chave):
             self.calendario_c.puxar_calendario(chave)
         else:
-            self.tela.mensagem("\nNão existe um calendário com essa chave,"
-                               " crie um novo calendário ou insira"
-                               " outra chave.\nVoltando às opções"
-                               " do menu principal...")
+            self.tela.mensagem("\nNão existe calendário com essa chave, crie um novo calendário ou insira outra chave."
+                               "\nVoltando às opções do menu principal...")
 
     def imprimir(self):
         self.calendario_c.imprimir_calendarios()
 
     def menu(self):
         event, values = self.tela.menu()
-        escolha = 1
-        if values['-AC-']:
-            escolha = 2
-        elif values['-ADM-']:
-            escolha = 9
-
-
+        print(event, values)
+        escolha = None
+        for dupla in values.items():
+            if dupla[1]:
+                escolha = dupla[0]
         match escolha:
-            case 1:
-                self.criar()
-                self.tela.mensagem(("Calendário criado com sucesso!\nChave: "))
+            case '-CC-':
+                chaves = self.criar()
+                self.tela.mensagem(("Calendário criado com sucesso!\nChave: " + chaves[0] +
+                                    "\nSenha de Admin: " + chaves[1]))
                 self.menu()
-            case 2:
+            case '-AC-':
                 self.visualizar(values['-KEY-'])
                 self.menu()
-            case 9:
+            case '-AD-':
                 if values['-PWD-'] == self.__senha:
                     self.imprimir()
                 else:
                     if self.tela.capturar("Senha incorreta, tente novamente:") == self.__senha:
                         self.imprimir()
                     else:
-                        self.tela.mensagem("Senha incorreta, voltando ao menu"
-                                       " principal...")
+                        self.tela.mensagem("Senha incorreta, voltando ao menu principal...")
                 self.menu()
