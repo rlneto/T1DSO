@@ -69,6 +69,7 @@ class SistemaC:
         match escolha:
             case 1:
                 self.criar()
+                self.tela.mensagem(("Calendário criado com sucesso!\nChave: "))
                 self.menu()
             case 2:
                 self.visualizar(values['-KEY-'])
