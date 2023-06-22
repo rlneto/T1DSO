@@ -1,6 +1,7 @@
 class Calendario:
-    def __init__(self, chave: str):
+    def __init__(self, chave: str, senha_adm: str):
         self.__chave = chave
+        self.__senha_adm = senha_adm
         self.__eventos_aniversarios = dict()
         self.__eventos_sociais = dict()
         self.__eventos_academicos = dict()
@@ -8,6 +9,10 @@ class Calendario:
     @property
     def chave(self):
         return self.__chave
+
+    @property
+    def chave_adm(self):
+        return self.__senha_adm
 
     @property
     def eventos_aniversarios(self):

@@ -1,6 +1,5 @@
 
-
-from Views.sistema_v import SistemaV
+from Views.sistema_v2 import SistemaV2
 from Controllers.calendario_c import CalendarioC
 from Controllers.aniversario_c import AniversarioC
 from Controllers.social_c import SocialC
@@ -13,8 +12,8 @@ class SistemaC:
         self.__aniversario_c = AniversarioC(self)
         self.__social_c = SocialC(self)
         self.__academico_c = AcademicoC(self)
-        self.__tela = SistemaV()
-        self.__senha = 123321
+        self.__tela = SistemaV2()
+        self.__senha = '123321'
 
     @property
     def tela(self):
@@ -37,7 +36,7 @@ class SistemaC:
         return self.__academico_c
 
     def criar(self):
-        self.calendario_c.anexar_calendario()
+        return self.calendario_c.anexar_calendario()
 
     def verificar_chave(self, chave):
         if chave in self.calendario_c.calendarios.keys():
@@ -45,40 +44,38 @@ class SistemaC:
         else:
             return False
 
-    def visualizar(self):
-        chave = str(self.tela.capturar("\nDigite a chave identificadora do"
-                                       " calendário: "))
+    def visualizar(self, chave: str):
         if self.verificar_chave(chave):
             self.calendario_c.puxar_calendario(chave)
         else:
-            self.tela.mensagem("\nNão existe um calendário com essa chave,"
-                               " crie um novo calendário ou insira"
-                               " outra chave.\nVoltando às opções"
-                               " do menu principal...")
+            self.tela.mensagem("\nNão existe calendário com essa chave, crie um novo calendário ou insira outra chave."
+                               "\nVoltando às opções do menu principal...")
 
     def imprimir(self):
         self.calendario_c.imprimir_calendarios()
 
     def menu(self):
-        escolha = self.tela.menu()
+        event, values = self.tela.menu()
+        print(event, values)
+        escolha = None
+        for dupla in values.items():
+            if dupla[1]:
+                escolha = dupla[0]
         match escolha:
-            case 1:
-                self.criar()
+            case '-CC-':
+                chaves = self.criar()
+                self.tela.mensagem(("Calendário criado com sucesso!\nChave: " + chaves[0] +
+                                    "\nSenha de Admin: " + chaves[1]))
                 self.menu()
-            case 2:
-                self.visualizar()
+            case '-AC-':
+                self.visualizar(values['-KEY-'])
                 self.menu()
-            case 9:
-                if self.tela.capturar("Insira a senha de administrador: ") ==\
-                      self.__senha:
+            case '-AD-':
+                if values['-PWD-'] == self.__senha:
                     self.imprimir()
                 else:
-                    self.tela.mensagem("Senha incorreta, voltando ao menu"
-                                       " principal...")
-                self.menu()
-            case 0:
-                self.tela.mensagem("Saindo do sistema...")
-                exit(0)
-            case _:
-                self.tela.mensagem("\nOpção inválida, tente novamente.\n")
+                    if self.tela.capturar("Senha incorreta, tente novamente:") == self.__senha:
+                        self.imprimir()
+                    else:
+                        self.tela.mensagem("Senha incorreta, voltando ao menu principal...")
                 self.menu()
