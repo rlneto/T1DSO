@@ -151,8 +151,12 @@ class CalendarioC:
                 exit(0)
 
     def menu_tipo(self, verbo: str):
-        r = int(self.tela.tipo_evento(verbo))
-        match r:
+        values = self.tela.tipo_evento(verbo)
+        escolha = None
+        for dupla in values.items():
+            if dupla[1]:
+                escolha = dupla[0]
+        match int(escolha):
             case 1:
                 if verbo == "incluir":
                     niver = self.sistema_c.aniversario_c.incluir()

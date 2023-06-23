@@ -4,6 +4,7 @@ import PySimpleGUI as sg
 class CalendarioV2:
     def __init__(self):
         self.__window = None
+        self.__window_tipo = None
         self.init_components()
 
     @property
@@ -31,11 +32,20 @@ class CalendarioV2:
                                size=sz, key='-HOME-')]
                 ]
 
-        layout = [
+        layout_principal = [
             [sg.Column(layout_esquerda),
              sg.VSeparator(),
              sg.Column(layout_direita)]
         ]
+
+        layout_tipo = [
+            [sg.Text('Escolha o tipo de evento')],
+            [sg.Radio('Aniversário','grupo_1', default=True, key='1')],
+            [sg.Radio('Social', 'grupo_1', key='2')],
+            [sg.Radio('Academico', 'grupo_1', key='3')],
+            [sg.Submit('Prosseguir')]
+        ]
+
         # layout = [[sg.Text('Opções do calendário')],
         #           [sg.Radio('Incluir/editar evento', 'grupo_2', key='-IE-'), sg.Text('Dia: '),
         #            sg.InputText('', key='-DIA-'), sg.Text('Mês: '), sg.InputText('', key='-MES-')],
@@ -44,7 +54,8 @@ class CalendarioV2:
         #           [sg.Radio('Excluir Calendário', 'grupo_2', default=True, key='-DEL-'), sg.Text('Senha de Admin: '),
         #            sg.InputText('', key='-ADM-')],
         #           [sg.Submit('Prosseguir')]]
-        self.__window = sg.Window('Oniverso', layout)
+        self.__window = sg.Window('Oniverso', layout_principal)
+        self.__window_tipo = sg.Window('Oniverso', layout_tipo)
 
     def mensagem(self, texto: str):
         sg.Popup(texto)
@@ -56,4 +67,6 @@ class CalendarioV2:
         return self.__window.read()
 
     def tipo_evento(self, verbo):
-        return 
+        event, values = self.__window_tipo.read()
+        if event == 'Prosseguir':
+            return values

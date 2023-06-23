@@ -19,7 +19,7 @@ class SistemaV2:
         ]
         sz = (40, 2)
         layout_direita = [
-                    [sg.Button('Criar calendário', 
+                    [sg.Button('Criar calendário',
                                size=sz, key='-CC-')],
                     [sg.Button('Acessar calendário',
                                size=sz, key='-AC-')],
