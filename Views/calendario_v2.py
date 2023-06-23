@@ -5,6 +5,7 @@ class CalendarioV2:
     def __init__(self):
         self.__window = None
         self.__window_tipo = None
+        self.__window_data = None
         self.init_components()
 
     @property
@@ -40,22 +41,25 @@ class CalendarioV2:
 
         layout_tipo = [
             [sg.Text('Escolha o tipo de evento')],
-            [sg.Radio('Aniversário','grupo_1', default=True, key='1')],
+            [sg.Radio('Aniversário', 'grupo_1', default=True, key='1')],
             [sg.Radio('Social', 'grupo_1', key='2')],
             [sg.Radio('Academico', 'grupo_1', key='3')],
             [sg.Submit('Prosseguir')]
         ]
 
-        # layout = [[sg.Text('Opções do calendário')],
-        #           [sg.Radio('Incluir/editar evento', 'grupo_2', key='-IE-'), sg.Text('Dia: '),
-        #            sg.InputText('', key='-DIA-'), sg.Text('Mês: '), sg.InputText('', key='-MES-')],
-        #           [sg.Radio('Visualizar eventos', 'grupo_2', default=True, key='-VW-')],
-        #           [sg.Radio('Voltar ao menu inicial', 'grupo_2', key='-HOME-')],
-        #           [sg.Radio('Excluir Calendário', 'grupo_2', default=True, key='-DEL-'), sg.Text('Senha de Admin: '),
-        #            sg.InputText('', key='-ADM-')],
-        #           [sg.Submit('Prosseguir')]]
+        layout_data = [
+            [sg.Text('Dia:'), sg.InputCombo((1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+                                            12, 13, 14, 15, 16, 17, 18, 19, 20,
+                                            21, 22, 23, 24, 25, 26, 27, 28, 29,
+                                            30, 31))],
+            [sg.Text('Mês:'), sg.InputCombo((1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+                                            12))],
+            [sg.Submit('Prosseguir')]
+        ]
+
         self.__window = sg.Window('Oniverso', layout_principal)
         self.__window_tipo = sg.Window('Oniverso', layout_tipo)
+        self.__window_data = sg.Window('Oniverso', layout_data)
 
     def mensagem(self, texto: str):
         sg.Popup(texto)
@@ -66,7 +70,15 @@ class CalendarioV2:
     def menu_calendario(self):
         return self.__window.read()
 
-    def tipo_evento(self, verbo):
+    def tipo_evento(self):
         event, values = self.__window_tipo.read()
         if event == 'Prosseguir':
             return values
+
+    def puxar_data(self):
+        event, values = self.__window_data.read()
+        if event == 'Prosseguir':
+            data = ''
+            for dupla in values.items():
+                data += str(dupla[1]).zfill(2)
+            return data

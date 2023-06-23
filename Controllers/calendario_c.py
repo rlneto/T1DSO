@@ -49,7 +49,6 @@ class CalendarioC:
         self.calendarios = criar[0].copy()
         return criar[1], criar[2]
 
-
     def imprimir_calendarios(self):
         if self.calendarios:
             for item in self.calendarios.values():
@@ -106,10 +105,7 @@ class CalendarioC:
                 if self.verificar_chave(1, niver):
                     self.sistema_c.aniversario_c.menu(niver)
                 else:
-                    self.tela.mensagem("\nNão existe um aniversário com essa"
-                                       " data, crie/edite um aniversário ou"
-                                       " procure por outra data.\nVoltando às"
-                                       " opções do calendário...")
+                    self.sistema_c.aniversario_c.tela.mostrar_tudo(None, niver)
             case "social":
                 social = self.tela.puxar_data()
                 if self.verificar_chave(2, social):
@@ -134,7 +130,7 @@ class CalendarioC:
         escolha = event
         match escolha:
             case '-IE-':
-                self.menu_tipo("incluir")
+                self.menu_tipo("acessar")
                 self.menu(chave)
             case '-VW-':
                 self.menu_tipo("visualizar")
@@ -151,7 +147,7 @@ class CalendarioC:
                 exit(0)
 
     def menu_tipo(self, verbo: str):
-        values = self.tela.tipo_evento(verbo)
+        values = self.tela.tipo_evento()
         escolha = None
         for dupla in values.items():
             if dupla[1]:

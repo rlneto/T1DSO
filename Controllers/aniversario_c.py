@@ -1,5 +1,5 @@
 from Models.aniversario import Aniversario
-from Views.aniversario_v import AniversarioV
+from Views.aniversario_v2 import AniversarioV2
 from Controllers.evento_c import EventoC
 
 
@@ -7,7 +7,7 @@ class AniversarioC(EventoC):
     def __init__(self, sistema):
         super().__init__(sistema)
         self.__sistema_c = sistema
-        self.__tela = AniversarioV()
+        self.__tela = AniversarioV2()
         self.__evento = None
 
     @property

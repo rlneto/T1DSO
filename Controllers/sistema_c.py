@@ -48,7 +48,8 @@ class SistemaC:
         if self.verificar_chave(chave):
             self.calendario_c.puxar_calendario(chave)
         else:
-            self.tela.mensagem("\nNão existe calendário com essa chave, crie um novo calendário ou insira outra chave."
+            self.tela.mensagem("\nNão existe calendário com essa chave,\
+                                crie um novo calendário ou insira outra chave."
                                "\nVoltando às opções do menu principal...")
 
     def imprimir(self):
@@ -61,8 +62,9 @@ class SistemaC:
         match escolha:
             case '-CC-':
                 chaves = self.criar()
-                self.tela.mensagem(("Calendário criado com sucesso!\nChave: " + chaves[0] +
-                                    "\nSenha de Admin: " + chaves[1]))
+                self.tela.mensagem(("Calendário criado com sucesso!\nChave: "
+                                    + chaves[0] + "\nSenha de Admin: "
+                                    + chaves[1]))
                 self.menu()
             case '-AC-':
                 chave = self.tela.capturar("chave do calendario")
@@ -73,8 +75,10 @@ class SistemaC:
                 if senha == self.__senha:
                     self.imprimir()
                 else:
-                    if self.tela.capturar("Senha incorreta, tente novamente:") == self.__senha:
+                    if self.tela.capturar("Senha incorreta,\
+                                           tente novamente:") == self.__senha:
                         self.imprimir()
                     else:
-                        self.tela.mensagem("Senha incorreta, voltando ao menu principal...")
+                        self.tela.mensagem("Senha incorreta,\
+                                            voltando ao menu principal...")
                 self.menu()
