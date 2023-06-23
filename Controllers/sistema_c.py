@@ -57,10 +57,7 @@ class SistemaC:
     def menu(self):
         event, values = self.tela.menu()
         print(event, values)
-        escolha = None
-        for dupla in values.items():
-            if dupla[1]:
-                escolha = dupla[0]
+        escolha = event
         match escolha:
             case '-CC-':
                 chaves = self.criar()
@@ -68,10 +65,12 @@ class SistemaC:
                                     "\nSenha de Admin: " + chaves[1]))
                 self.menu()
             case '-AC-':
-                self.visualizar(values['-KEY-'])
+                chave = self.tela.capturar("chave do calendario")
+                self.visualizar(chave)
                 self.menu()
-            case '-AD-':
-                if values['-PWD-'] == self.__senha:
+            case '-DEV-':
+                senha = self.tela.capturar("senha dev")
+                if senha == self.__senha:
                     self.imprimir()
                 else:
                     if self.tela.capturar("Senha incorreta, tente novamente:") == self.__senha:

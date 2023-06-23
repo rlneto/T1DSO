@@ -7,14 +7,32 @@ class SistemaV2:
         self.init_components()
 
     def init_components(self):
-        sg.theme('Dark')
-        layout = [[sg.Text('ONIVERSO')],
-                  [sg.Radio('Criar calendário', 'grupo_1', key='-CC-')],
-                  [sg.Radio('Acessar calendário', 'grupo_1', default=True, key='-AC-'), sg.Text('Chave: '),
-                   sg.InputText('', key='-KEY-')],
-                  [sg.Radio('Menu de desenvolvedor', 'grupo_1', key='-DEV-')],
-                  [sg.Submit('Prosseguir')]]
-        self.__window = sg.Window('Oniverso', layout)
+        sg.SetOptions(background_color='#061D49',
+                      text_element_background_color='#061D49',
+                      element_background_color='#061D49',
+                      scrollbar_color=None,
+                      input_elements_background_color='#D9D9D9',
+                      button_color=('#061D49', '#8CD1DC'),
+                      font=('Verdana', 12))
+        layout_esquerda = [
+            [sg.Image(filename="inicio.png")]
+        ]
+        sz = (40, 2)
+        layout_direita = [
+                    [sg.Button('Criar calendário', 
+                               size=sz, key='-CC-')],
+                    [sg.Button('Acessar calendário',
+                               size=sz, key='-AC-')],
+                    [sg.Button('Menu de desenvolvedor',
+                               size=sz, key='-DEV-')]
+                ]
+
+        layout = [
+            [sg.Column(layout_esquerda),
+             sg.VSeparator(),
+             sg.Column(layout_direita)]
+        ]
+        self.__window = sg.Window('ONIVERSO', layout)
 
     def mensagem(self, texto: str):
         sg.Popup(texto)

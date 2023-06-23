@@ -1,5 +1,5 @@
 from Models.calendario import Calendario
-from Views.calendario_v import CalendarioV
+from Views.calendario_v2 import CalendarioV2
 from random import random
 
 
@@ -8,7 +8,7 @@ class CalendarioC:
         self.__sistema_c = sistema_c
         self.__calendarios = dict()
         self.__calendario = Calendario("00", "00")
-        self.__tela = CalendarioV()
+        self.__tela = CalendarioV2()
 
     @property
     def tela(self):
@@ -130,12 +130,13 @@ class CalendarioC:
                                        "\nVoltando às opções do calendário...")
 
     def menu(self, chave: str):
-        escolha = self.tela.menu_calendario(chave)
+        event, value = self.tela.menu_calendario()
+        escolha = event
         match escolha:
-            case 1:
+            case '-IE-':
                 self.menu_tipo("incluir")
                 self.menu(chave)
-            case 2:
+            case '-VW-':
                 self.menu_tipo("visualizar")
                 self.menu(chave)
             case 3:
@@ -143,7 +144,8 @@ class CalendarioC:
                 self.menu(chave)
             case 4:
                 del self.calendarios[chave]
-            case 0:
+            case '-HOME-':
+                self.tela.window.close()
                 self.sistema_c.menu()
             case _:
                 exit(0)
