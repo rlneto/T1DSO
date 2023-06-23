@@ -6,6 +6,9 @@ class SistemaV2:
         self.__window = None
         self.init_components()
 
+    @property
+    def window(self):
+        return self.__window
     def init_components(self):
         sg.SetOptions(background_color='#061D49',
                       text_element_background_color='#061D49',
@@ -41,4 +44,5 @@ class SistemaV2:
         return sg.popup_get_text(texto)
 
     def menu(self):
+        self.init_components()
         return self.__window.read()

@@ -46,6 +46,7 @@ class SistemaC:
 
     def visualizar(self, chave: str):
         if self.verificar_chave(chave):
+            self.tela.window.close()
             self.calendario_c.puxar_calendario(chave)
         else:
             self.tela.mensagem("\nNão existe calendário com essa chave,\
@@ -53,6 +54,7 @@ class SistemaC:
                                "\nVoltando às opções do menu principal...")
 
     def imprimir(self):
+        self.tela.window.close()
         self.calendario_c.imprimir_calendarios()
 
     def menu(self):

@@ -36,13 +36,5 @@ class EventoC(ABC):
         return n_evento
 
     @abstractmethod
-    def alterar(self) -> evento:
-        pass
-
-    @abstractmethod
-    def mostrar_evento(self, evento):
-        pass
-
-    @abstractmethod
     def menu(self, chave: str):
         pass

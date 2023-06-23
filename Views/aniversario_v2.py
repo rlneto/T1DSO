@@ -7,6 +7,10 @@ class AniversarioV2(EventoV2):
         super().__init__()
         self.__window = None
 
+    @property
+    def window(self):
+        return self.__window
+
     def init_components(self, aniversario, data):
         sg.SetOptions(background_color='#061D49',
                       text_element_background_color='#061D49',
@@ -23,14 +27,14 @@ class AniversarioV2(EventoV2):
                 [sg.Text(f'Data: {data[:2]}/{data[-2:]}')],
                 [sg.Text('Nome(s):'), sg.InputText()],
                 [sg.Text('Descrição:'), sg.InputText()],
-                [sg.Submit('Salvar')]
+                [sg.Submit('Salvar'), sg.Button('Voltar')]
             ]
         else:
             layout_direita = [
-            [sg.Text(f"Data: {data[:2]}/{data[-2:]}")],
-            [sg.Text("Nome(s):"), sg.InputText(aniversario.titulo)],
-            [sg.Text("Descrição:"), sg.InputText(aniversario.descricao)],
-            [sg.Submit('Salvar')]
+             [sg.Text(f"Data: {data[:2]}/{data[-2:]}")],
+             [sg.Text("Nome(s):"), sg.InputText(aniversario.titulo)],
+             [sg.Text("Descrição:"), sg.InputText(aniversario.descricao)],
+             [sg.Submit('Salvar'), sg.Button('Voltar')]
             ]
 
         layout_principal = [
@@ -46,11 +50,15 @@ class AniversarioV2(EventoV2):
 
     def capturar(self, texto: str) -> str:
         return sg.popup_get_text(texto)
-
-    def incluir_evento(self):
-        #print(self.__window.read())
-        pass
     
-    def mostrar_tudo(self, aniversario, data):
+    def mostrar_e_incluir(self, aniversario, data):
         self.init_components(aniversario, data)
-        self.__window.read()
+        event, values = self.__window.read()
+        if event == "Salvar":
+            dados = [data]
+            for dupla in values.items():
+                dados.append(dupla[1])
+            print(dados)
+            return dados
+        else:
+            return "-HOME-"

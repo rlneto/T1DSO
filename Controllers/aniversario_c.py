@@ -25,39 +25,31 @@ class AniversarioC(EventoC):
     @evento.setter
     def evento(self, evento):
         self.__evento = evento
-
-    def incluir(self):
-        dados = self.tela.incluir_evento()
+    
+    def incluir(self, dados):
         n_evento = Aniversario(dados[0], dados[1], dados[2])
         return n_evento
 
-    def alterar(self):
-        n_evento = self.evento
-        dados = self.tela.alterar_evento()
-        n_evento.titulo, n_evento.descricao = dados[0], dados[1]
-        return n_evento
-
-    def mostrar_evento(self, aniversario):
-        self.tela.mostrar_tudo(aniversario)
-
-    def menu(self, chave: str):
-        self.evento = self.sistema_c.calendario_c.calendario.\
-            eventos_aniversarios[chave]
-        escolha = int(self.tela.menu(chave))
-        match escolha:
-            case 1:
-                self.mostrar_evento(self.evento)
-                self.menu(chave)
-            case 2:
-                self.evento = self.alterar()
-                self.menu(chave)
-            case 3:
-                del self.sistema_c.calendario_c.calendario.\
-                    eventos_aniversarios[chave]
-                self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.
-                                                 calendario.chave)
-            case 0:
-                self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.
-                                                 calendario.chave)
-            case _:
-                exit(0)
+    def menu(self, chave: str, existe: bool):
+        niver = None
+        if existe:
+            self.evento = self.sistema_c.calendario_c.calendario.\
+                eventos_aniversarios[chave]
+            dados = self.tela.mostrar_e_incluir(self.evento, chave)
+            if dados == "-HOME-":
+                self.tela.window.close()
+                self.sistema_c.menu()
+            else:
+                niver = self.incluir(dados)
+        else:
+            dados = self.tela.mostrar_e_incluir(None, chave)
+            if dados == "-HOME-":
+                self.tela.window.close()
+                self.sistema_c.menu()
+            else:
+                niver = self.incluir(dados)
+        
+        if niver is not None:
+            self.sistema_c.calendario_c.calendario.\
+                eventos_aniversarios[niver.data] = niver
+            self.tela.mensagem("Salvo!")

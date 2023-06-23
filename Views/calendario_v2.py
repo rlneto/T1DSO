@@ -12,6 +12,14 @@ class CalendarioV2:
     def window(self):
         return self.__window
 
+    @property
+    def window_tipo(self):
+        return self.__window_tipo
+
+    @property
+    def window_data(self):
+        return self.__window_data
+
     def init_components(self):
         sg.SetOptions(background_color='#061D49',
                       text_element_background_color='#061D49',
@@ -68,14 +76,17 @@ class CalendarioV2:
         return sg.popup_get_text(texto)
 
     def menu_calendario(self):
+        self.init_components()
         return self.__window.read()
 
     def tipo_evento(self):
+        self.init_components()
         event, values = self.__window_tipo.read()
         if event == 'Prosseguir':
             return values
 
     def puxar_data(self):
+        self.init_components()
         event, values = self.__window_data.read()
         if event == 'Prosseguir':
             data = ''

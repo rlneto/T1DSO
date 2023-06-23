@@ -97,33 +97,8 @@ class CalendarioC:
             return True
         else:
             return False
-
-    def acessar_eventos(self, tipo: str):
-        match tipo:
-            case "niver":
-                niver = self.tela.puxar_data()
-                if self.verificar_chave(1, niver):
-                    self.sistema_c.aniversario_c.menu(niver)
-                else:
-                    self.sistema_c.aniversario_c.tela.mostrar_tudo(None, niver)
-            case "social":
-                social = self.tela.puxar_data()
-                if self.verificar_chave(2, social):
-                    self.sistema_c.social_c.menu(social)
-                else:
-                    self.tela.mensagem("\nNão existe um evento social com essa"
-                                       " data, crie/edite um evento social ou"
-                                       " procure por outra data.\nVoltando às"
-                                       " opções do calendário...")
-            case "academico":
-                academico = self.tela.puxar_data()
-                if self.verificar_chave(3, academico):
-                    self.sistema_c.academico_c.menu(academico)
-                else:
-                    self.tela.mensagem("\nNão existe um evento academico com"
-                                       " essa data, crie/edite um evento"
-                                       " academico ou procure por outra data."
-                                       "\nVoltando às opções do calendário...")
+    ###############################################
+    ###############################################
 
     def menu(self, chave: str):
         event, value = self.tela.menu_calendario()
@@ -135,16 +110,9 @@ class CalendarioC:
             case '-VW-':
                 self.menu_tipo("visualizar")
                 self.menu(chave)
-            case 3:
-                self.menu_tipo("acessar")
-                self.menu(chave)
-            case 4:
-                del self.calendarios[chave]
             case '-HOME-':
                 self.tela.window.close()
                 self.sistema_c.menu()
-            case _:
-                exit(0)
 
     def menu_tipo(self, verbo: str):
         values = self.tela.tipo_evento()
@@ -154,13 +122,15 @@ class CalendarioC:
                 escolha = dupla[0]
         match int(escolha):
             case 1:
-                if verbo == "incluir":
-                    niver = self.sistema_c.aniversario_c.incluir()
-                    self.calendario.eventos_aniversarios[niver.data] = niver
+                if verbo == "acessar":
+                    self.tela.window_tipo.close()
+                    data = self.tela.puxar_data()
+                    self.tela.window_data.close()
+                    self.tela.window.close()
+                    self.sistema_c.aniversario_c.\
+                        menu(data, self.verificar_chave(1, data))
                 elif verbo == "visualizar":
                     self.visualizar_eventos("niver")
-                elif verbo == "acessar":
-                    self.acessar_eventos("niver")
             case 2:
                 if verbo == "incluir":
                     social = self.sistema_c.social_c.incluir()
@@ -178,7 +148,3 @@ class CalendarioC:
                     self.visualizar_eventos("academico")
                 elif verbo == "acessar":
                     self.acessar_eventos("academico")
-            case 0:
-                self.menu()
-            case _:
-                exit(0)
