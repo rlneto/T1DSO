@@ -67,10 +67,12 @@ class SistemaC:
                 self.tela.mensagem(("Calendário criado com sucesso!\nChave: "
                                     + chaves[0] + "\nSenha de Admin: "
                                     + chaves[1]))
+                self.tela.window.close()
                 self.menu()
             case '-AC-':
                 chave = self.tela.capturar("chave do calendario")
                 self.visualizar(chave)
+                self.tela.window.close()
                 self.menu()
             case '-DEV-':
                 senha = self.tela.capturar("senha dev")
@@ -83,4 +85,7 @@ class SistemaC:
                     else:
                         self.tela.mensagem("Senha incorreta,\
                                             voltando ao menu principal...")
+                self.tela.window.close()
                 self.menu()
+            case _:
+                exit()

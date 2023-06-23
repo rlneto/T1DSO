@@ -1,25 +1,38 @@
 import PySimpleGUI as sg
 
-sg.SetOptions(background_color='#061D49',
-              text_element_background_color='#061D49',
-              element_background_color='#061D49',
-              scrollbar_color=None,
-              input_elements_background_color='#D9D9D9',
-              button_color=('#061D49', '#8CD1DC'))
+class Person:
+    def __init__(self, name, age, city):
+        self.name = name
+        self.age = age
+        self.city = city
 
-layout_esquerda = [
-    [sg.Image(filename="inicio.png")]
+# Lista de objetos Person
+people = [
+    Person('John', 25, 'New York'),
+    Person('Jane', 30, 'London'),
+    Person('Bob', 40, 'Paris')
 ]
-layout_direita = [
-            [sg.Button('Criar calendário', size=(50, 2))],
-            [sg.Button('Acessar calendário', size=(50, 2))],
-            [sg.Button('Menu de desenvolvedor', size=(50, 2))]
-        ]
 
+# Converter objetos em listas de valores
+data = [[person.name, person.age, person.city] for person in people]
+
+# Definir a estrutura da tabela
 layout = [
-    [sg.Column(layout_esquerda),
-     sg.VSeparator(),
-     sg.Column(layout_direita)]
+    [sg.Table(values=data, headings=['Name', 'Age', 'City'],
+              justification='left',
+              display_row_numbers=True,
+              num_rows=10,
+              key='-TABLE-')],
+    [sg.Button('Fechar')]
 ]
-window = sg.Window('Oniverso', layout)
-window.read()
+
+# Criar a janela
+window = sg.Window('Tabela', layout)
+
+while True:
+    event, values = window.read()
+    if event == sg.WINDOW_CLOSED or event == 'Fechar':
+        break
+
+window.close()
+

@@ -64,9 +64,9 @@ class CalendarioC:
         match tipo:
             case "niver":
                 if self.calendario.eventos_aniversarios:
-                    for evento in \
-                            self.calendario.eventos_aniversarios.values():
-                        self.sistema_c.aniversario_c.mostrar_evento(evento)
+                    print(self.calendario.eventos_aniversarios.values())
+                    aniversarios = self.calendario.eventos_aniversarios.values()
+                    self.sistema_c.aniversario_c.mostrar_evento(aniversarios)
                 else:
                     self.tela.mensagem("Vazio! Sem aniversários no"
                                        " calendário.")
@@ -132,13 +132,15 @@ class CalendarioC:
                 elif verbo == "visualizar":
                     self.visualizar_eventos("niver")
             case 2:
-                if verbo == "incluir":
-                    social = self.sistema_c.social_c.incluir()
-                    self.calendario.eventos_sociais[social.data] = social
+                if verbo == "acessar":
+                    self.tela.window_tipo.close()
+                    data = self.tela.puxar_data()
+                    self.tela.window_data.close()
+                    self.tela.window.close()
+                    self.sistema_c.social_c.\
+                        menu(data, self.verificar_chave(1, data))
                 elif verbo == "visualizar":
                     self.visualizar_eventos("social")
-                elif verbo == "acessar":
-                    self.acessar_eventos("social")
             case 3:
                 if verbo == "incluir":
                     academico = self.sistema_c.academico_c.incluir()
