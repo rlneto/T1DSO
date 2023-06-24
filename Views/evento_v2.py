@@ -23,7 +23,7 @@ class EventoV2(ABC):
         pass
 
     @abstractmethod
-    def capturar(self, texto: str) -> str:
+    def capturar(self, texto: str):
         pass
 
     @abstractmethod

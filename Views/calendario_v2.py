@@ -74,23 +74,43 @@ class CalendarioV2:
     def mensagem(self, texto: str):
         sg.Popup(texto)
 
-    def capturar(self, texto: str) -> str:
-        return sg.popup_get_text(texto)
+    def capturar(self, texto: str):
+        def capturar(self, texto: str):
+            while True:
+                janela = sg.Window(texto, [[sg.InputText(default_text='', key='-TEXTO-')],
+                                           [sg.Button('OK'), sg.Button('Cancelar')]])
+                entrada = janela.read()
+                if entrada != 'OK' or sg.WIN_CLOSED:
+                    janela.close()
+                    break
+                else:
+                    try:
+                        teste = int(entrada[1]['-TEXTO-'])
+                    except ValueError:
+                        sg.Popup('Valor inválido.')
+                    else:
+                        janela.close()
+                        break
+            return entrada
 
     def menu_calendario(self):
         self.init_components()
-        return self.__window.read()
+        retorno = self.__window.read()
+        self.__window.close()
+        return retorno
 
     def tipo_evento(self):
         self.init_components()
         event, values = self.__window_tipo.read()
         if event == 'Prosseguir':
+            self.__window_tipo.close()
             return values
 
     def puxar_data(self):
         self.init_components()
         event, values = self.__window_data.read()
         if event == 'Prosseguir':
+            self.__window_data.close()
             data = ''
             for dupla in values.items():
                 data += str(dupla[1]).zfill(2)

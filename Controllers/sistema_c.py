@@ -6,6 +6,7 @@ from Controllers.social_c import SocialC
 from Controllers.academico_c import AcademicoC
 
 
+
 class SistemaC:
     def __init__(self):
         self.__calendario_c = CalendarioC(self)
@@ -45,13 +46,20 @@ class SistemaC:
             return False
 
     def visualizar(self, chave: str):
-        if self.verificar_chave(chave):
-            self.tela.window.close()
-            self.calendario_c.puxar_calendario(chave)
+        try:
+            chave_teste = int(chave)
+        except TypeError:
+            self.tela.mensagem('Tipo inválido, tente novamente.')
+        except ValueError:
+            self.tela.mensagem('Valor inválido ,tente novamente.')
         else:
-            self.tela.mensagem("\nNão existe calendário com essa chave,\
-                                crie um novo calendário ou insira outra chave."
-                               "\nVoltando às opções do menu principal...")
+            if self.verificar_chave(chave):
+                self.tela.window.close()
+                self.calendario_c.puxar_calendario(chave)
+            else:
+                self.tela.mensagem("Não existe calendário com essa chave,\
+                                    crie um novo calendário ou insira outra chave."
+                                   "\nVoltando às opções do menu principal...")
 
     def imprimir(self):
         self.tela.window.close()
@@ -59,7 +67,6 @@ class SistemaC:
 
     def menu(self):
         event, values = self.tela.menu()
-        print(event, values)
         escolha = event
         match escolha:
             case '-CC-':
@@ -70,21 +77,24 @@ class SistemaC:
                 self.tela.window.close()
                 self.menu()
             case '-AC-':
-                chave = self.tela.capturar("chave do calendario")
-                self.visualizar(chave)
-                self.tela.window.close()
-                self.menu()
+                botao, chave = self.tela.capturar("chave do calendario")
+                chave = chave['-TEXTO-']
+                if botao == 'OK':
+                    self.visualizar(chave)
+                    self.tela.window.close()
+                    self.menu()
+                else:
+                    self.tela.window.close()
+                    self.menu()
             case '-DEV-':
-                senha = self.tela.capturar("senha de desenvolvedor")
+                senha = self.tela.capturar("senha de desenvolvedor")[1]['-TEXTO-']
                 if senha == self.__senha:
                     self.imprimir()
                 else:
-                    if self.tela.capturar("Senha incorreta,\
-                                           tente novamente:") == self.__senha:
+                    if self.tela.capturar("Senha incorreta, tente novamente")[1]['-TEXTO-'] == self.__senha:
                         self.imprimir()
                     else:
-                        self.tela.mensagem("Senha incorreta,\
-                                            voltando ao menu principal...")
+                        self.tela.mensagem("Senha incorreta, voltando ao menu principal...")
                 self.tela.window.close()
                 self.menu()
             case _:

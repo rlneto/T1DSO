@@ -75,8 +75,23 @@ class SocialV2(EventoV2):
     def mensagem(self, texto: str):
         sg.Popup(texto)
 
-    def capturar(self, texto: str) -> str:
-        return sg.popup_get_text(texto)
+    def capturar(self, texto: str):
+        while True:
+            janela = sg.Window(texto, [[sg.InputText(default_text='', key='-TEXTO-')],
+                                       [sg.Button('OK'), sg.Button('Cancelar')]])
+            entrada = janela.read()
+            if entrada != 'OK' or sg.WIN_CLOSED:
+                janela.close()
+                break
+            else:
+                try:
+                    teste = int(entrada[1]['-TEXTO-'])
+                except ValueError:
+                    sg.Popup('Valor inválido.')
+                else:
+                    janela.close()
+                    break
+        return entrada
 
     def listar(self, dados):
         self.init_components(dados, 32)
