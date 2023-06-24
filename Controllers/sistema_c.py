@@ -75,7 +75,7 @@ class SistemaC:
                 self.tela.window.close()
                 self.menu()
             case '-DEV-':
-                senha = self.tela.capturar("senha dev")
+                senha = self.tela.capturar("senha de desenvolvedor")
                 if senha == self.__senha:
                     self.imprimir()
                 else:

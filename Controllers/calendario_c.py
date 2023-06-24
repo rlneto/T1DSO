@@ -117,8 +117,12 @@ class CalendarioC:
             case '-HOME-':
                 self.tela.window.close()
                 self.sistema_c.menu()
+            case '-DEL-':
+                if self.tela.capturar('senha') == self.calendario.chave_adm:
+                    del self.calendarios[self.calendario.chave]
 
     def menu_tipo(self, verbo: str):
+        self.tela.window.close()
         values = self.tela.tipo_evento()
         escolha = None
         if values is not None:
@@ -128,7 +132,6 @@ class CalendarioC:
         match escolha:
             case 1:
                 if verbo == "acessar":
-                    self.tela.window_tipo.close()
                     data = self.tela.puxar_data()
                     self.tela.window_data.close()
                     self.tela.window.close()
@@ -136,13 +139,11 @@ class CalendarioC:
                         menu(data, self.verificar_chave(1, data))
                 elif verbo == "visualizar":
                     self.visualizar_eventos("niver")
-                self.menu(self.calendario.data)
             case 2:
                 if verbo == "acessar":
                     self.tela.window_tipo.close()
                     data = self.tela.puxar_data()
                     self.tela.window_data.close()
-                    self.tela.window.close()
                     self.sistema_c.social_c.\
                         menu(data, self.verificar_chave(1, data))
                 elif verbo == "visualizar":
@@ -152,7 +153,6 @@ class CalendarioC:
                     self.tela.window_tipo.close()
                     data = self.tela.puxar_data()
                     self.tela.window_data.close()
-                    self.tela.window.close()
                     self.sistema_c.academico_c.\
                         menu(data, self.verificar_chave(1, data))
                 elif verbo == "visualizar":

@@ -57,7 +57,7 @@ class AniversarioC(EventoC):
                 self.sistema_c.menu()
             else:
                 niver = self.incluir(dados)
-        
+
         if niver is not None:
             self.sistema_c.calendario_c.calendario.\
                 eventos_aniversarios[niver.data] = niver

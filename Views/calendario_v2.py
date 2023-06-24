@@ -37,8 +37,10 @@ class CalendarioV2:
                                size=sz, key='-IE-')],
                     [sg.Button('Visualizar eventos',
                                size=sz, key='-VW-')],
+                    [sg.Button('Deletar Calandário',
+                               size=sz, key='-DEL-')],
                     [sg.Button('Voltar ao menu inicial',
-                               size=sz, key='-HOME-')]
+                               size=sz, key='-HOME-')],
                 ]
 
         layout_principal = [

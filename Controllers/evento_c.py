@@ -30,6 +30,10 @@ class EventoC(ABC):
         self.__evento = evento
 
     @abstractmethod
+    def mostrar_evento(self, eventos):
+        pass
+
+    @abstractmethod
     def incluir(self):
         dados = self.tela.incluir_evento()
         n_evento = Evento(dados[0], dados[1], dados[2])

@@ -47,16 +47,18 @@ class AniversarioV2(EventoV2):
         if aniversario is None and data != 32:
             layout_direita = [
                 [sg.Text(f'Data: {data[:2]}/{data[-2:]}')],
-                [sg.Text('Nome(s):'), sg.InputText()],
-                [sg.Text('Descrição:'), sg.InputText()],
-                [sg.Submit('Salvar'), sg.Button('Voltar')]
+                [sg.Text('Nome(s):'), sg.Push(), sg.InputText()],
+                [sg.Text('Descrição:'), sg.Push(), sg.InputText()],
+                [sg.Submit('Salvar'), sg.Push(), sg.Button('Voltar')]
             ]
         elif data != 32:
             layout_direita = [
              [sg.Text(f"Data: {data[:2]}/{data[-2:]}")],
-             [sg.Text("Nome(s):"), sg.InputText(aniversario.titulo)],
-             [sg.Text("Descrição:"), sg.InputText(aniversario.descricao)],
-             [sg.Submit('Salvar'), sg.Button('Voltar')]
+             [sg.Text("Nome(s):"), sg.Push(),
+              sg.InputText(aniversario.titulo)],
+             [sg.Text("Descrição:"), sg.Push(),
+              sg.InputText(aniversario.descricao)],
+             [sg.Submit('Salvar'), sg.Push(), sg.Button('Voltar')]
             ]
 
         layout_principal = [

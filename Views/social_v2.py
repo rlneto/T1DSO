@@ -48,18 +48,19 @@ class SocialV2(EventoV2):
         if social is None and data != 32:
             layout_direita = [
                 [sg.Text(f'Data: {data[:2]}/{data[-2:]}')],
-                [sg.Text('Título:'), sg.InputText()],
-                [sg.Text("Local:"), sg.InputText()],
-                [sg.Text('Descrição:'), sg.InputText()],
-                [sg.Submit('Salvar'), sg.Button('Voltar')]
+                [sg.Text('Título:'), sg.Push(), sg.InputText()],
+                [sg.Text("Local:"), sg.Push(), sg.InputText()],
+                [sg.Text('Descrição:'), sg.Push(), sg.InputText()],
+                [sg.Submit('Salvar'), sg.Push(), sg.Button('Voltar')]
             ]
         elif data != 32:
             layout_direita = [
              [sg.Text(f"Data: {data[:2]}/{data[-2:]}")],
-             [sg.Text("Título:"), sg.InputText(social.titulo)],
-             [sg.Text("Local:"), sg.InputText(social.local)],
-             [sg.Text("Descrição:"), sg.InputText(social.descricao)],
-             [sg.Submit('Salvar'), sg.Button('Voltar')]
+             [sg.Text("Título:"), sg.Push(), sg.InputText(social.titulo)],
+             [sg.Text("Local:"), sg.Push(), sg.InputText(social.local)],
+             [sg.Text("Descrição:"), sg.Push(),
+              sg.InputText(social.descricao)],
+             [sg.Submit('Salvar'), sg.Push(), sg.Button('Voltar')]
             ]
 
         layout_principal = [

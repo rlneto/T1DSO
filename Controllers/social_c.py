@@ -32,7 +32,8 @@ class SocialC(EventoC):
             data = obj.data[:2]+'/'+obj.data[-2:]
             dados.append([data, obj.titulo, obj.local, obj.descricao])
         dados = sorted(dados, key=lambda x: (x[0])[-2:])
-        self.tela.listar(dados)
+        if self.tela.listar(dados):
+            self.tela.window_tabela.close()
 
     def incluir(self, dados):
         n_evento = Social(dados[0], dados[1], dados[2], dados[3])
