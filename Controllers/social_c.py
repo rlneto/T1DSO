@@ -1,5 +1,5 @@
 from Models.social import Social
-from Views.social_v import SocialV
+from Views.social_v2 import SocialV2
 from Controllers.evento_c import EventoC
 
 
@@ -7,7 +7,7 @@ class SocialC(EventoC):
     def __init__(self, sistema):
         super().__init__(sistema)
         self.__sistema_c = sistema
-        self.__tela = SocialV()
+        self.__tela = SocialV2()
         self.__evento = None
 
     @property
@@ -26,39 +26,39 @@ class SocialC(EventoC):
     def evento(self, evento):
         self.__evento = evento
 
-    def incluir(self):
-        dados = self.tela.incluir_evento()
-        s_evento = Social(dados[0], dados[1], dados[2], dados[3])
-        return s_evento
+    def mostrar_evento(self, sociais):
+        dados = []
+        for obj in sociais:
+            data = obj.data[:2]+'/'+obj.data[-2:]
+            dados.append([data, obj.titulo, obj.local, obj.descricao])
+        dados = sorted(dados, key=lambda x: (x[0])[-2:])
+        self.tela.listar(dados)
 
-    def alterar(self):
-        s_evento = self.evento
-        dados = self.tela.alterar_evento()
-        s_evento.titulo, s_evento.local, s_evento.descricao = dados[0],\
-            dados[1], dados[2]
-        return s_evento
+    def incluir(self, dados):
+        n_evento = Social(dados[0], dados[1], dados[2], dados[3])
+        return n_evento
 
-    def mostrar_evento(self, social):
-        self.tela.mostrar_tudo(social)
+    def menu(self, chave: str, existe: bool):
+        social = None
+        if existe:
+            self.evento = self.sistema_c.calendario_c.calendario.\
+                eventos_sociais[chave]
+            dados = self.tela.mostrar_e_incluir(self.evento, chave)
+            if dados == "-HOME-":
+                self.tela.window.close()
+                self.sistema_c.menu()
+            else:
+                social = self.incluir(dados)
+        else:
+            dados = self.tela.mostrar_e_incluir(None, chave)
+            if dados == "-HOME-":
+                self.tela.window.close()
+                self.sistema_c.menu()
+            else:
+                social = self.incluir(dados)
 
-    def menu(self, chave: str):
-        self.evento = self.sistema_c.calendario_c.calendario.\
-            eventos_sociais[chave]
-        escolha = int(self.tela.menu(chave))
-        match escolha:
-            case 1:
-                self.mostrar_evento(self.evento)
-                self.menu(chave)
-            case 2:
-                self.evento = self.alterar()
-                self.menu(chave)
-            case 3:
-                del self.sistema_c.calendario_c.calendario.\
-                    eventos_sociais[chave]
-                self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.
-                                                 calendario.chave)
-            case 0:
-                self.sistema_c.calendario_c.menu(self.sistema_c.calendario_c.
-                                                 calendario.chave)
-            case _:
-                exit(0)
+        if social is not None:
+            self.sistema_c.calendario_c.calendario.\
+                eventos_sociais[social.data] = social
+            self.tela.mensagem("Salvo!")
+            self.tela.window.close()

@@ -51,8 +51,12 @@ class CalendarioC:
 
     def imprimir_calendarios(self):
         if self.calendarios:
-            for item in self.calendarios.values():
-                self.tela.listagem(item.chave)
+            print(self.calendarios)
+            dados = []
+            for obj in self.calendarios.values():
+                dados.append([obj.chave,
+                              obj.chave_adm, obj])
+            self.sistema_c.tela.listar_calendarios(dados)
         else:
             self.tela.mensagem("Vazio! Sem calendários no sistema.")
 
@@ -64,23 +68,23 @@ class CalendarioC:
         match tipo:
             case "niver":
                 if self.calendario.eventos_aniversarios:
-                    print(self.calendario.eventos_aniversarios.values())
-                    aniversarios = self.calendario.eventos_aniversarios.values()
+                    aniversarios = self.calendario.\
+                        eventos_aniversarios.values()
                     self.sistema_c.aniversario_c.mostrar_evento(aniversarios)
                 else:
                     self.tela.mensagem("Vazio! Sem aniversários no"
                                        " calendário.")
             case "social":
                 if self.calendario.eventos_sociais:
-                    for evento in self.calendario.eventos_sociais.values():
-                        self.sistema_c.social_c.mostrar_evento(evento)
+                    sociais = self.calendario.eventos_sociais.values()
+                    self.sistema_c.social_c.mostrar_evento(sociais)
                 else:
                     self.tela.mensagem("Vazio! Sem eventos sociais no"
                                        " calendário.")
             case "academico":
                 if self.calendario.eventos_academicos:
-                    for evento in self.calendario.eventos_academicos.values():
-                        self.sistema_c.academico_c.mostrar_evento(evento)
+                    academicos = self.calendario.eventos_academicos.values()
+                    self.sistema_c.academico_c.mostrar_evento(academicos)
                 else:
                     self.tela.mensagem("Vazio! Sem eventos academicos no"
                                        " calendário.")
@@ -117,10 +121,11 @@ class CalendarioC:
     def menu_tipo(self, verbo: str):
         values = self.tela.tipo_evento()
         escolha = None
-        for dupla in values.items():
-            if dupla[1]:
-                escolha = dupla[0]
-        match int(escolha):
+        if values is not None:
+            for dupla in values.items():
+                if dupla[1]:
+                    escolha = int(dupla[0])
+        match escolha:
             case 1:
                 if verbo == "acessar":
                     self.tela.window_tipo.close()
@@ -131,6 +136,7 @@ class CalendarioC:
                         menu(data, self.verificar_chave(1, data))
                 elif verbo == "visualizar":
                     self.visualizar_eventos("niver")
+                self.menu(self.calendario.data)
             case 2:
                 if verbo == "acessar":
                     self.tela.window_tipo.close()
@@ -142,11 +148,12 @@ class CalendarioC:
                 elif verbo == "visualizar":
                     self.visualizar_eventos("social")
             case 3:
-                if verbo == "incluir":
-                    academico = self.sistema_c.academico_c.incluir()
-                    self.calendario.eventos_academicos[academico.data]\
-                        = academico
+                if verbo == "acessar":
+                    self.tela.window_tipo.close()
+                    data = self.tela.puxar_data()
+                    self.tela.window_data.close()
+                    self.tela.window.close()
+                    self.sistema_c.academico_c.\
+                        menu(data, self.verificar_chave(1, data))
                 elif verbo == "visualizar":
                     self.visualizar_eventos("academico")
-                elif verbo == "acessar":
-                    self.acessar_eventos("academico")

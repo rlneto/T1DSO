@@ -2,7 +2,7 @@ from Views.evento_v2 import EventoV2
 import PySimpleGUI as sg
 
 
-class SocialV2(EventoV2):
+class AcademicoV2(EventoV2):
     def __init__(self):
         super().__init__()
         self.__window = None
@@ -16,7 +16,7 @@ class SocialV2(EventoV2):
     def window_tabela(self):
         return self.__window_tabela
 
-    def init_components(self, social, data):
+    def init_components(self, academico, data):
         sg.SetOptions(background_color='#061D49',
                       text_element_background_color='#061D49',
                       element_background_color='#061D49',
@@ -28,13 +28,14 @@ class SocialV2(EventoV2):
         layout_tabela = [[]]
         if data == 32:
             layout_tabela = [
-                [sg.Table(values=social, headings=['Data',
-                                                   'Título',
-                                                   'Local',
-                                                   'Descrição'],
+                [sg.Table(values=academico, headings=['Data',
+                                                      'Título',
+                                                      'Matéria',
+                                                      'Professor(a)',
+                                                      'Descrição'],
                           justification='left',
                           auto_size_columns=False,
-                          col_widths=[10, 15, 35, 50],
+                          col_widths=[10, 10, 15, 15, 40],
                           display_row_numbers=True,
                           num_rows=10,
                           key='-TABLE-')],
@@ -42,23 +43,25 @@ class SocialV2(EventoV2):
             ]
 
         layout_esquerda = [
-            [sg.Image(filename='social.png')]
+            [sg.Image(filename='academico.png')]
         ]
         layout_direita = [[]]
-        if social is None and data != 32:
+        if academico is None and data != 32:
             layout_direita = [
                 [sg.Text(f'Data: {data[:2]}/{data[-2:]}')],
                 [sg.Text('Título:'), sg.InputText()],
-                [sg.Text("Local:"), sg.InputText()],
+                [sg.Text("Matéria:"), sg.InputText()],
+                [sg.Text("Professor(a):"), sg.InputText()],
                 [sg.Text('Descrição:'), sg.InputText()],
                 [sg.Submit('Salvar'), sg.Button('Voltar')]
             ]
         elif data != 32:
             layout_direita = [
              [sg.Text(f"Data: {data[:2]}/{data[-2:]}")],
-             [sg.Text("Título:"), sg.InputText(social.titulo)],
-             [sg.Text("Local:"), sg.InputText(social.local)],
-             [sg.Text("Descrição:"), sg.InputText(social.descricao)],
+             [sg.Text("Título:"), sg.InputText(academico.titulo)],
+             [sg.Text("Matéria:"), sg.InputText(academico.materia)],
+             [sg.Text("Professor(a):"), sg.InputText(academico.professor)],
+             [sg.Text("Descrição:"), sg.InputText(academico.descricao)],
              [sg.Submit('Salvar'), sg.Button('Voltar')]
             ]
 
@@ -81,8 +84,8 @@ class SocialV2(EventoV2):
         self.init_components(dados, 32)
         self.__window_tabela.read()
 
-    def mostrar_e_incluir(self, social, data):
-        self.init_components(social, data)
+    def mostrar_e_incluir(self, academico, data):
+        self.init_components(academico, data)
         event, values = self.__window.read()
         if event == "Salvar":
             dados = [data]
