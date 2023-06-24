@@ -52,12 +52,12 @@ class SistemaC:
                                "\nVoltando às opções do menu principal...")
 
     def imprimir(self):
-        self.calendario_c.imprimir_calendarios()
+        self.tela.mensagem(self.calendario_c.imprimir_calendarios())
 
     def menu(self):
         event, values = self.tela.menu()
         print(event, values)
-        escolha = None
+        escolha = '-EXIT-'
         for dupla in values.items():
             if dupla[1]:
                 escolha = dupla[0]
@@ -70,12 +70,9 @@ class SistemaC:
             case '-AC-':
                 self.visualizar(values['-KEY-'])
                 self.menu()
-            case '-AD-':
-                if values['-PWD-'] == self.__senha:
-                    self.imprimir()
-                else:
-                    if self.tela.capturar("Senha incorreta, tente novamente:") == self.__senha:
-                        self.imprimir()
-                    else:
-                        self.tela.mensagem("Senha incorreta, voltando ao menu principal...")
+            case '-DEV-':
+                self.imprimir()
                 self.menu()
+            case '-EXIT-':
+                self.tela.mensagem("Saindo do sistema.")
+                exit(0)

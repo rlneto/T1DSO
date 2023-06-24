@@ -12,8 +12,11 @@ class SistemaV2:
                   [sg.Radio('Criar calendário', 'grupo_1', key='-CC-')],
                   [sg.Radio('Acessar calendário', 'grupo_1', default=True, key='-AC-'), sg.Text('Chave: '),
                    sg.InputText('', key='-KEY-')],
-                  [sg.Radio('Menu de desenvolvedor', 'grupo_1', key='-DEV-')],
-                  [sg.Submit('Prosseguir')]]
+                  [sg.Radio('Relação de calendários', 'grupo_1', key='-DEV-')],
+                  [sg.Submit('Prosseguir')],
+                  [[sg.Text('Event: ')], [sg.Text(key='-OUT EVENT-')]],
+                  [[sg.Text('Values: ')], [sg.Text(key='-OUT VALUES-')]]
+                  ]
         self.__window = sg.Window('Oniverso', layout)
 
     def mensagem(self, texto: str):
@@ -24,3 +27,16 @@ class SistemaV2:
 
     def menu(self):
         return self.__window.read()
+
+    def update(self):
+        self.__window['-OUT EVENT-'].update(event)
+        self.__window['-OUT VALUES-'].update(values)
+
+
+teste = SistemaV2()
+
+while True:
+    event, values = teste.menu()
+    if event == sg.WIN_CLOSED:
+        break
+    teste.update()
