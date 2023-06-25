@@ -4,6 +4,7 @@ from Controllers.calendario_c import CalendarioC
 from Controllers.aniversario_c import AniversarioC
 from Controllers.social_c import SocialC
 from Controllers.academico_c import AcademicoC
+from DAO.dao_calendario import DAOCalendario
 
 
 
@@ -15,7 +16,12 @@ class SistemaC:
         self.__academico_c = AcademicoC(self)
         self.__tela = SistemaV2()
         self.__senha = '123321'
+        self.__dao_c = DAOCalendario(self)
 
+
+    @property
+    def dao(self):
+        return self.__dao_c
     @property
     def tela(self):
         return self.__tela
