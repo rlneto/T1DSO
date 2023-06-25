@@ -100,6 +100,7 @@ class AcademicoV2(EventoV2):
     def listar(self, dados):
         self.init_components(dados, 32)
         self.__window_tabela.read()
+        self.__window_tabela.close()
 
     def mostrar_e_incluir(self, academico, data):
         self.init_components(academico, data)

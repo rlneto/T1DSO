@@ -87,14 +87,16 @@ class SistemaC:
                     self.tela.window.close()
                     self.menu()
             case '-DEV-':
-                senha = self.tela.capturar("senha de desenvolvedor")[1]['-TEXTO-']
-                if senha == self.__senha:
+                entrada = self.tela.capturar("senha de desenvolvedor")
+                if entrada[0] == 'OK' and entrada[1]['-TEXTO-'] == self.__senha:
                     self.imprimir()
                 else:
-                    if self.tela.capturar("Senha incorreta, tente novamente")[1]['-TEXTO-'] == self.__senha:
-                        self.imprimir()
-                    else:
-                        self.tela.mensagem("Senha incorreta, voltando ao menu principal...")
+                    if entrada[0] == 'OK':
+                        entrada = self.tela.capturar("Senha incorreta, tente novamente")
+                        if entrada[0] == 'OK' and entrada[1]['-TEXTO-'] == self.__senha:
+                            self.imprimir()
+                        elif entrada[0] == 'OK':
+                            self.tela.mensagem("Senha incorreta, voltando ao menu principal...")
                 self.tela.window.close()
                 self.menu()
             case _:

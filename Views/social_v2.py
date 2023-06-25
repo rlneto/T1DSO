@@ -91,15 +91,17 @@ class SocialV2(EventoV2):
                 else:
                     janela.close()
                     break
-        return entrada
+        return entrada[1]['-TEXTO-']
 
     def listar(self, dados):
         self.init_components(dados, 32)
         self.__window_tabela.read()
+        self.__window_tabela.close()
 
     def mostrar_e_incluir(self, social, data):
         self.init_components(social, data)
         event, values = self.__window.read()
+        self.__window.close()
         if event == "Salvar":
             dados = [data]
             for dupla in values.items():

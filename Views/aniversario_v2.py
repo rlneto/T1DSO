@@ -89,7 +89,7 @@ class AniversarioV2(EventoV2):
                 else:
                     janela.close()
                     break
-        return entrada
+        return entrada[1]['-TEXTO-']
 
     def listar(self, dados):
         self.init_components(dados, 32)
@@ -97,6 +97,9 @@ class AniversarioV2(EventoV2):
         if event == "Voltar":
             self.__window_tabela.close()
             return True
+        else:
+            self.__window_tabela.close()
+            return False
 
     def mostrar_e_incluir(self, aniversario, data):
         self.init_components(aniversario, data)
