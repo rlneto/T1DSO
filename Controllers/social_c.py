@@ -61,5 +61,6 @@ class SocialC(EventoC):
         if social is not None:
             self.sistema_c.calendario_c.calendario.\
                 eventos_sociais[social.data] = social
+            self.sistema_c.dao.quick_save(self.sistema_c.calendario_c.calendarios)
             self.tela.mensagem("Salvo!")
             self.tela.window.close()

@@ -10,13 +10,14 @@ from DAO.dao_calendario import DAOCalendario
 
 class SistemaC:
     def __init__(self):
+        self.__dao_c = DAOCalendario()
         self.__calendario_c = CalendarioC(self)
         self.__aniversario_c = AniversarioC(self)
         self.__social_c = SocialC(self)
         self.__academico_c = AcademicoC(self)
         self.__tela = SistemaV2()
         self.__senha = '123321'
-        self.__dao_c = DAOCalendario(self)
+
 
 
     @property

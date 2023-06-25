@@ -2,7 +2,7 @@ import pickle as pickle
 
 
 class DAOCalendario:
-    def __init__(self, datasource='', cache=None):
+    def __init__(self, cache=None, datasource='calendarios.pkl'):
         if cache is None:
             cache = {}
         self.__datasource = datasource
@@ -26,6 +26,7 @@ class DAOCalendario:
 
     def quick_load(self) -> dict:
         self.__load()
+        print(self.__cache)
         return self.__cache
 
     def quick_save(self, calendarios: dict):

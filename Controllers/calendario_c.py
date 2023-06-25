@@ -6,7 +6,7 @@ from random import random
 class CalendarioC:
     def __init__(self, sistema_c):
         self.__sistema_c = sistema_c
-        self.__calendarios = dict()
+        self.__calendarios = self.__sistema_c.dao.quick_load()
         self.__calendario = Calendario("00", "00")
         self.__tela = CalendarioV2()
 
@@ -47,6 +47,7 @@ class CalendarioC:
     def anexar_calendario(self):
         criar = self.criar_calendario()
         self.calendarios = criar[0].copy()
+        self.__sistema_c.dao.quick_save(self.calendarios)
         return criar[1], criar[2]
 
     def imprimir_calendarios(self):
@@ -121,11 +122,13 @@ class CalendarioC:
                 entrada = self.tela.capturar("senha de desenvolvedor")
                 if entrada[0] == 'OK' and entrada[1]['-TEXTO-'] == self.calendario.chave_adm:
                     del self.calendarios[self.calendario.chave]
+                    self.sistema_c.dao.quick_save(self.calendarios)
                 else:
                     if entrada[0] == 'OK':
                         entrada = self.tela.capturar("Senha incorreta, tente novamente")
                         if entrada[0] == 'OK' and entrada[1]['-TEXTO-'] == self.calendario.chave_adm:
                             del self.calendarios[self.calendario.chave]
+                            self.sistema_c.dao.quick_save(self.calendarios)
                         elif entrada[0] == 'OK':
                             self.tela.mensagem("Senha incorreta, voltando ao menu principal...")
 

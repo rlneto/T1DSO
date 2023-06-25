@@ -60,7 +60,7 @@ class AcademicoC(EventoC):
                 academico = self.incluir(dados)
 
         if academico is not None:
-            self.sistema_c.calendario_c.calendario.\
-                eventos_academicos[academico.data] = academico
+            self.sistema_c.calendario_c.calendario.eventos_academicos[academico.data] = academico
+            self.sistema_c.dao.quick_save(self.sistema_c.calendario_c.calendarios)
             self.tela.mensagem("Salvo!")
             self.tela.window.close()
