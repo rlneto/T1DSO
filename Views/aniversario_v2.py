@@ -75,8 +75,10 @@ class AniversarioV2(EventoV2):
 
     def capturar(self, texto: str):
         while True:
-            janela = sg.Window(texto, [[sg.InputText(default_text='', key='-TEXTO-')],
-                                       [sg.Button('OK'), sg.Button('Cancelar')]])
+            janela = sg.Window(texto, [[sg.InputText(default_text='',
+                                                     key='-TEXTO-')],
+                                       [sg.Button('OK'),
+                                        sg.Button('Cancelar')]])
             entrada = janela.read()
             if entrada != 'OK' or sg.WIN_CLOSED:
                 janela.close()

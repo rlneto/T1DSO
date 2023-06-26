@@ -18,4 +18,3 @@ class DAO(ABC):
     def __load(self):
         with open(self.__datasource, 'rb') as arquivo:
             self.__cache = pickle.load(arquivo)
-

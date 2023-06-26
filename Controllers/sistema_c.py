@@ -7,7 +7,6 @@ from Controllers.academico_c import AcademicoC
 from DAO.dao_calendario import DAOCalendario
 
 
-
 class SistemaC:
     def __init__(self):
         self.__dao_c = DAOCalendario()
@@ -18,11 +17,10 @@ class SistemaC:
         self.__tela = SistemaV2()
         self.__senha = '123321'
 
-
-
     @property
     def dao(self):
         return self.__dao_c
+
     @property
     def tela(self):
         return self.__tela
@@ -65,8 +63,9 @@ class SistemaC:
                 self.calendario_c.puxar_calendario(chave)
             else:
                 self.tela.mensagem("Não existe calendário com essa chave,\
-                                    crie um novo calendário ou insira outra chave."
-                                   "\nVoltando às opções do menu principal...")
+                                    crie um novo calendário ou insira outra\
+                                    chave.""\nVoltando às opções do menu\
+                                    principal...")
 
     def imprimir(self):
         self.tela.window.close()
@@ -95,15 +94,19 @@ class SistemaC:
                     self.menu()
             case '-DEV-':
                 entrada = self.tela.capturar("senha de desenvolvedor")
-                if entrada[0] == 'OK' and entrada[1]['-TEXTO-'] == self.__senha:
+                if (entrada[0] == 'OK' and
+                        entrada[1]['-TEXTO-'] == self.__senha):
                     self.imprimir()
                 else:
                     if entrada[0] == 'OK':
-                        entrada = self.tela.capturar("Senha incorreta, tente novamente")
-                        if entrada[0] == 'OK' and entrada[1]['-TEXTO-'] == self.__senha:
+                        entrada = self.tela.capturar("Senha incorreta,\
+                                                     tente novamente")
+                        if (entrada[0] == 'OK' and
+                                entrada[1]['-TEXTO-'] == self.__senha):
                             self.imprimir()
                         elif entrada[0] == 'OK':
-                            self.tela.mensagem("Senha incorreta, voltando ao menu principal...")
+                            self.tela.mensagem("Senha incorreta, voltando ao\
+                                               menu principal...")
                 self.tela.window.close()
                 self.menu()
             case _:

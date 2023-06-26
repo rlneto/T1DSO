@@ -120,17 +120,23 @@ class CalendarioC:
                 self.sistema_c.menu()
             case '-DEL-':
                 entrada = self.tela.capturar("senha de desenvolvedor")
-                if entrada[0] == 'OK' and entrada[1]['-TEXTO-'] == self.calendario.chave_adm:
+                if (entrada[0] == 'OK' and
+                        entrada[1]['-TEXTO-'] ==
+                        self.calendario.chave_adm):
                     del self.calendarios[self.calendario.chave]
                     self.sistema_c.dao.quick_save(self.calendarios)
                 else:
                     if entrada[0] == 'OK':
-                        entrada = self.tela.capturar("Senha incorreta, tente novamente")
-                        if entrada[0] == 'OK' and entrada[1]['-TEXTO-'] == self.calendario.chave_adm:
+                        entrada = self.tela.capturar("Senha incorreta,\
+                                                     tente novamente")
+                        if (entrada[0] == 'OK' and
+                                entrada[1]['-TEXTO-'] ==
+                                self.calendario.chave_adm):
                             del self.calendarios[self.calendario.chave]
                             self.sistema_c.dao.quick_save(self.calendarios)
                         elif entrada[0] == 'OK':
-                            self.tela.mensagem("Senha incorreta, voltando ao menu principal...")
+                            self.tela.mensagem("Senha incorreta, voltando ao\
+                                               menu principal...")
 
     def menu_tipo(self, verbo: str):
         self.tela.window.close()
